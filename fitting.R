@@ -89,4 +89,4 @@ procTime <- round((proc.time()[3] - t.start)/(60), 1) # track process time
 cat(paste("Process time for model =", procTime, "minutes"))
 
 
-# saveRDS(fit, file = "output/fit_model10_centeredSO_20210609_3chains0.rds")
+# saveRDS(fit, file = "output/fit_coho3_20211029.rds")
