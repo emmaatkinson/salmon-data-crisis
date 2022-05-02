@@ -1,100 +1,31 @@
-# Load results from JAGS model fitting
-library(gplots)
-library(dclone)
-library(sjmisc) # for is_even() function
-
-habNames2 <- c("%Agri", "%Urban", "RipDist", "LinDev", "ForestRds", "nonForestRds", "StreamXing", "ForestDist", "ECA", "MPB")
-
-library(PNWColors)
-
-spawnCol <- pnw_palette("Bay", n = 5)[c(1,2,4,5)]
-mazCol <- pnw_palette("Bay", n = 7)
-fazCol <- pnw_palette("Bay", n = 22)
-
 ###############################################################################
-# Calculate Rhat, Summary output, and delist MCMC chains
+###############################################################################
+#
+# Quantifying the relationship between population trends and freshwater habitat
+# Stephanie Peacock <speacock@psf.ca>
+#
+# This code loads to .rds file of MCMC output from model fits to produce a 
+# number of plots that visualize parameter estimates and results.
+# The assessment of vulnerability is separate in the vulnerability.R file.
+#
+###############################################################################
 ###############################################################################
 
-# fit <- readRDS("output/fit_model10_centeredSO_20210512.rds") #This one actually convered better
-fit <- readRDS("output/fit_model10_centeredSO_20210609_3chains0.rds") # Three longer chains had total convergence; 0 is for the fits with negative pressures corrected to zero
 
-rHat <- gelman.diag(fit)
-cn <- colnames(fit[[1]])
+# Source code that loads MCMC output and de-lists/creates index
+# to easier access that output.
 
-S <- summary(fit)
+source("loadResults.R")
 
-iter <- 1:dim(fit[[1]])[1]
-
-# S[[1]]['log_lik',]
-
-#-----------------------------------------------------------------------------
-# Define useful parameters
-#-----------------------------------------------------------------------------
-
-# Load population data used in fitting
-source("loadPopData.R")
-
-nPop <- dim(popDat)[1]
-nFAZ <- length(fazNames)
-nMAZ <- length(mazNames)
-nSpawn <- length(spawnNames)
-nRear <- length(rearNames)
-nHab <- length(habNames)
-
-#-----------------------------------------------------------------------------
-# Delist results for easy summary of range etc. among chains
-#-----------------------------------------------------------------------------
-out <- array(NA, dim = c(length(fit), dim(fit[[1]])), dimnames = list(paste("chain", c(1:length(fit)), sep =""), NULL, cn))
-for(i in 1:length(fit)){
-	out[i, , ] <- fit[[i]]
-}
-
-
-# Create list of parameter indices for beta0 and beta1
-outInd <- list(
-	beta0 = which(cn == "beta0"),
-	beta1 = array(NA, dim = c(nSpawn, nHab)),
-	phi = grep("phi", cn),
-	sigmaMAZ = which(cn == "sigmaMAZ"),
-	sigma = which(cn == "sigma")
-)
-
-for(i in 1:nSpawn){
-	for(j in 1:nHab){
-		outInd$beta1[i, j] <- match(paste("beta1[", i, ",", j, "]", sep = ""), cn)
-	}
-}
-
-# Random effect for region
-outInd$thetaMAZ <- array(NA, dim = c(nMAZ, nRear))
-for(i in 1:nMAZ){
-	for(j in 1:nRear){
-		outInd$thetaMAZ[i, j] <- match(paste("thetaMAZ[", i, ",", j, "]", sep = ""), cn)
-	}
-}
-
-# Random effect for FAZ
-outInd$sigmaFAZ <- numeric(nHab)
-for(j in 1:nHab){ 
-		outInd$sigmaFAZ[j] <- match(paste("sigmaFAZ[", j, "]", sep = ""), cn)
-	}
-
-outInd$thetaFAZ <- array(NA, dim = c(nFAZ, nHab))
-for(i in 1:nFAZ){
-	for(j in 1:nHab){ 
-		outInd$thetaFAZ[i, j] <- match(paste("thetaFAZ[", i, ",", j, "]", sep = ""), cn)
-	}
-}
-
-rHat[[1]][outInd$beta1]
-
-# Table of parameter estimates
-# write.csv(S[[2]], "output/parEst3.csv")
+# fit = raw MCMC output from jags.fit()
+# out = de-listed fit, with dimension (3, 50000, 333) = (chains, iterations, 
+# parameters)
 
 ###############################################################################
 # Supplement: Trace plots for 62 fixed parameters
 ###############################################################################
 pdf(file = "figures/TracePlots.pdf", width = 7, height = 9, pointsize = 10)
+png(filename = "figures/TracePlots%03d.png", width = 7*150, height = 9*150, res = 150)
 # quartz(width = 7, height = 9, pointsize = 10)
 
 par(mfrow = c(5, 2), mar = c(2,4,2,6))
@@ -345,7 +276,7 @@ dev.off()
 #--------------------------------------------------------------------
 habNames4 <- c("Agriculture","Urban development","Riparian disturbance","Linear development" , "Forestry roads","Non-forestry roads","Stream crossings","Forest disturbance" , "ECA", "Pine beetle")
 
-png(filename = "figures/beta1_3chains.png", res = 150, width = 945, height = 1050)
+png(filename = "figures/beta1.png", res = 150, width = 945, height = 1050)
 # quartz(width = 6.3, height = 7, pointsize = 10)
 par(mfrow = c(4, 3), mar = c(3, 1, 2, 1), oma = c(2, 3, 1, 1))
 
@@ -417,7 +348,7 @@ spawnNames2[spawnNames2 == 'Pink/Chum'] <- "PinkChum"
 # pdf("figures/phiBySpawn.pdf", width = 9, height = 5, pointsize = 10)
 # quartz(width = 9, height = 5, pointsize = 10)
 for(i in 1:nSpawn){
-	png(paste0("figures/png/phi_", spawnNames2[i], "_3chains.png"), width = 1500, height = 750, res = 150)
+	png(paste0("figures/phi_", spawnNames2[i], ".png"), width = 1500, height = 750, res = 150)
 	
 	par(mfrow = c(2,5), mar= c(1,3,3,1), oma= c(3,3,1,0))
 	for(h in 1:JAGSdat$nHab){
