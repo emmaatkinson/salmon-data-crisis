@@ -3,21 +3,21 @@ library(rgdal)
 library(sp)
 library(mapdata)
 library(ggplot2)
-
+library(PNWColors)
 #------------------------------------------------------------------------------
 # Load spatial data
 #------------------------------------------------------------------------------
-
+col2 <- pnw_palette("Bay", n = 2)
 # Load mapping data
 library(PBSmapping)
 gshhg <- "~/Google Drive/Mapping/gshhg-bin-2.3.7/"
-xlim <- c(-135, -118) + 360
-ylim <- c(48, 58)
+xlim <- c(-134, -118)
+ylim <- c(48.17, 57.5)
 # five resolutions: crude(c), low(l), intermediate(i), high(h), and full(f).
 res <- "i"
-land <- importGSHHS(paste0(gshhg,"gshhs_", res, ".b"), xlim = xlim, ylim = ylim, maxLevel = 2, useWest = TRUE)
-rivers <- importGSHHS(paste0(gshhg,"wdb_rivers_", res, ".b"), xlim = xlim, ylim = ylim, useWest = TRUE)
-borders <- importGSHHS(paste0(gshhg,"wdb_borders_", res, ".b"), xlim = xlim, ylim = ylim, useWest = TRUE, maxLevel = 1)
+land <- importGSHHS(paste0(gshhg,"gshhs_", res, ".b"), xlim = xlim + 360, ylim = ylim, maxLevel = 2, useWest = TRUE)
+rivers <- importGSHHS(paste0(gshhg,"wdb_rivers_", res, ".b"), xlim = xlim  + 360, ylim = ylim, useWest = TRUE)
+borders <- importGSHHS(paste0(gshhg,"wdb_borders_", res, ".b"), xlim = xlim  + 360, ylim = ylim, useWest = TRUE, maxLevel = 1)
 
 #------------------------------------------------------------------------------
 # Import faz and convert to LL
@@ -134,6 +134,14 @@ faz <- as.PolySet(read.csv("data/ignore/PSF/fazLL_thinned_inDat.csv"), projectio
 
 maz <- as.PolySet(read.csv("data/ignore/PSF/mazLL_thinned_inDat.csv"), projection = "LL")
 
+# take out maz points that directly overlap shoreline data
+head(maz)
+head(land)
+# No direct matches to perhaps round?
+ind <- which(((round(maz$X, 2) %in% round(land$X, 2)) & (round(maz$Y, 3) %in% round(land$Y, 3)))==FALSE)
+
+mazInterior <- maz[ind, ]
+
 #------------------------------------------------------------------------------
 # Import population locations
 #------------------------------------------------------------------------------
@@ -181,8 +189,8 @@ polyCol <- pnw_palette("Bay", n = 2)
 
 fazCentroid <- calcCentroid(faz, rollup = 1)
 fazCentroid$FAZ_Acrony <- faz$FAZ_Acrony[match(fazCentroid$PID, faz$PID)]
-fazCentroid[mazCentroid$FAZ_Acrony == "EVI",c("X","Y")] <- c(-126.7291, 50.22792)
-fazCentroid[mazCentroid$FAZ_Acrony == "HecLow",c("X","Y")] <- c(-126.7291, 50.22792)
+fazCentroid[fazCentroid$FAZ_Acrony == "EVI",c("X","Y")] <- c(-126.7291, 50.22792)
+fazCentroid[fazCentroid$FAZ_Acrony == "HecLow",c("X","Y")] <- c(-126.7291, 50.22792)
 
 
 mazCentroid <- calcCentroid(maz, rollup = 1)
@@ -193,34 +201,45 @@ fazCol <- pnw_palette("Bay", n = 22)[c(12,10,6,4,15,17,5,20,11,8, 13,1,7,21,18,2
 mazCol <- pnw_palette("Bay", n = 8)[c(1,8,3,7,5,4,6,2)]
 
 
-quartz(width = 8, height = 5, pointsize = 10)
-png(file = "figures/faz_maz.png", width = 1400, height = 750, res= 150)
+# quartz(width = 3.54, height = 6, pointsize = 10)
+# png(file = "figures/faz_maz.png", width = 1400, height = 750, res= 150)
 
-par(mfrow = c(1,2))
+quartz(width = 4, height = 4, pointsize = 10)
+
+# par(mfrow = c(2,1), mar = c(2,3,2,1), oma= c(4, 0, 0, 0))
 
 # MAZ map
-plotMap(land, xlim = c(-135, -118), ylim = c(48.17, 58),	col = "white", bg = grey(0.8), las = 1, border = grey(0.6), lwd = 0.6, xlab = expression(paste(degree, "Longitude")), ylab = expression(paste(degree, "Latitude")))
-addLines(rivers, col = grey(0.6))
-addLines(borders)
+plotMap(land, col = "white", bg = "#0f85a050", las = 1, border = "#0f85a0", lwd = 0.6, xlab = "", ylab = "", ylim = c(48.2, 57.2))
 
-addPolys(maz, col = paste0(mazCol[match(mazCentroid$MAZ_Acrony, mazNames)], "80"), lwd = 0.5, border = mazCol[match(mazCentroid$MAZ_Acrony, mazNames)]) # Colourful FAZs
-# addPolys(maz, col = NA, lwd = 0.6, border = polyCol[1])
+addLines(rivers, col = col2[1], lwd = 0.5)
+# addLines(borders, lwd = 1.5)
+
+#addPolys(maz, col = paste0(mazCol[match(mazCentroid$MAZ_Acrony, mazNames)], "80"), lwd = 0.5, border = mazCol[match(mazCentroid$MAZ_Acrony, mazNames)]) # Colourful FAZs
+addPolys(maz, col = "#00000000", border = 1, lwd = 1)
+addPoints(streamDat, pch = 19, cex = 0.5, col = "#dd412460")
+
+addLines(mazInterior, col = 3)
+
+addPolys(maz, col = "#00000000", border = 1, lwd = 0.5)
+
 text(mazCentroid$X, mazCentroid$Y, mazCentroid$MAZ_Acrony, font = 2, cex = 0.8, col = 1) #col = fazCol[match(fazNames, fazCentroid$FAZ_Acrony)],
 mtext(side = 3, line = 1, "a) Marine Adaptive Zones (MAZs)", adj = 0)
 
 # FAZ map
-plotMap(land, xlim = c(-135, -118), ylim = c(48.17, 58),	col = "white", bg = grey(0.8), las = 1, border = grey(0.6), lwd = 0.6, xlab = expression(paste(degree, "Longitude")), ylab = "")
-addLines(rivers, col = grey(0.6))
-addLines(borders)
+plotMap(land, ylim = c(48.2, 57.2),	col = "white", bg = grey(0.9), las = 1, border = grey(0.8), lwd = 0.6, xlab = "", ylab = "")
+addLines(rivers, col = grey(0.8), lwd = 0.5)
+addLines(borders, lwd = 1.5)
+mtext(side = 1, outer= TRUE, expression(paste(degree, "Longitude")), line = 1, cex = 0.8)
+#addPolys(faz, col = paste0(fazCol[match(fazCentroid$FAZ_Acrony, fazNames)], "80"), lwd = 0.5, border = fazCol[match(fazCentroid$FAZ_Acrony, fazNames)]) # Colourful FAZs
+addPolys(faz, col = "#00000000", border = grey(0.4), lwd = 0.5)
 
-addPolys(faz, col = paste0(fazCol[match(fazCentroid$FAZ_Acrony, fazNames)], "80"), lwd = 0.5, border = fazCol[match(fazCentroid$FAZ_Acrony, fazNames)]) # Colourful FAZs
 text(fazCentroid$X, fazCentroid$Y, fazCentroid$FAZ_Acrony, font = 2, cex = 0.8)#, col = 
 
 mtext(side = 3, line = 1, "b) Freshwater Adaptive Zones (FAZs)", adj = 0)
+mtext(side = 2, outer = TRUE, expression(paste(degree, "Latitude")))
 
 
-
-dev.off()
+# dev.off()
 
 # # Colourful full faz names (old fig)
 # png(file = "figures/fazNames.png", width = 900, height = 750, res= 150)
@@ -229,3 +248,21 @@ dev.off()
 # 	text(1, nFAZ - i + 1, sort(unique(paste(faz$FAZ_Acrony, faz$FAZ_Name, sep = ": ")))[match(fazNames, sort(fazCentroid$FAZ_Acrony))][i], adj = 0, col = fazCol[i])
 # }
 # dev.off()
+
+
+#----------
+
+
+# MAZ map
+plotMap(land, col = "white", bg = "#0f85a050", las = 1, border = "#0f85a0", lwd = 0.6, xlab = "", ylab = "", ylim = c(48.2, 57.2))
+addLines(rivers, col = col2[1], lwd = 0.5)
+addPolys(maz, col = "#00000000", border = 1, lwd = 1)
+addPoints(streamDat, pch = 19, cex = 0.5, col = "#dd412460")
+
+# FAZ map
+plotMap(land, col = "white", bg = "#0f85a050", las = 1, border = "#0f85a0", lwd = 0.6, xlab = "", ylab = "", ylim = c(48.2, 57.2))
+addLines(rivers, col = col2[1], lwd = 0.5)
+addPolys(faz, col = "#00000000", border = 1, lwd = 1)
+addPoints(streamDat, pch = 19, cex = 0.5, col = "#dd412460")
+
+legend("topright", bg = "white", pch = 19, pt.cex = 0.5, col = "#dd412460", legend = "Included population")
