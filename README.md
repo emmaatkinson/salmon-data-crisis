@@ -1,7 +1,7 @@
 README
 ================
 Stephanie Peacock
-09/08/2021
+03/06/2022
 
 # Quantifying linkages between habitat and population status to aid recovery of at risk Pacific salmon populations
 
@@ -23,7 +23,7 @@ Files for compiling and checking data
     sources described in the report to yield a filtered dataset of
     trends in spawner abundance per population and habitat pressure
     values associated with spawning watersheds of those populations. The
-    “NuSEDS\_CU” part refers to the NuSEDS data by CU that were used in
+    “NuSEDS_CU” part refers to the NuSEDS data by CU that were used in
     this compilation.
 
 -   `functions.R`: contains several basic functions used repeatedly in
@@ -159,7 +159,7 @@ the relationship between population trend and habitat indicators.
 | Equivalent Clearcut Area (ECA)   | % watershed area | The percentage of total watershed area that is considered functionally and hydrologically comparable to a clearcut forest. Landscapes that have been altered by urban, road, rail, and forestry development as well as crown tenure were considered.                      |
 | Mountain pine beetle defoliation | % watershed area | The percentage of pine forests that have been killed by mountain pine beetle in each watershed.                                                                                                                                                                           |
 
-{}\* For watersheds with &gt;50% private ownership, forest disturbance
-and associated habitat indicators could not be accurately assessed as
-the data were not available, and so we removed those watersheds from the
+{}\* For watersheds with \>50% private ownership, forest disturbance and
+associated habitat indicators could not be accurately assessed as the
+data were not available, and so we removed those watersheds from the
 analysis.

@@ -43,7 +43,7 @@ habSummary <- data.frame(
 	max = apply(hab, 2, max, na.rm = TRUE)
 )
 
-
+write.csv(habSummary, file = "habSummary.csv")
 # For percent, increase from 0 to 100%
 pct <- c(1, 2, 3, 8, 9, 10)
 den <- c(4, 5, 6, 7)
@@ -189,6 +189,7 @@ for(s in 1:nSpecies){
 } # end s species
 
 # saveRDS(y_pred, file = "output/predictedTrend_forRiskAssessment.rds")
+y_pred <- readRDS("output/predictedTrend_forRiskAssessment.rds")
 #--------------------------------------------------------------------
 # Calculate % threatened and endangered
 #--------------------------------------------------------------------
@@ -300,7 +301,7 @@ xlim <- c(-135, -118) + 360
 ylim <- c(48, 58)
 
 # five resolutions: crude(c), low(l), intermediate(i), high(h), and full(f).
-res <- "c"
+res <- "i"
 land <- importGSHHS(paste0(gshhg,"gshhs_", res, ".b"), xlim = xlim, ylim = ylim, maxLevel = 2, useWest = TRUE)
 rivers <- importGSHHS(paste0(gshhg,"wdb_rivers_", res, ".b"), xlim = xlim, ylim = ylim, useWest = TRUE)
 borders <- importGSHHS(paste0(gshhg,"wdb_borders_", res, ".b"), xlim = xlim, ylim = ylim, useWest = TRUE, maxLevel = 1)
@@ -310,7 +311,7 @@ cbind(tapply(faz$FAZ_Acrony, faz$PID, unique), fazNames)
 fazIndex <- unique(faz$PID)[match(fazNames, tapply(faz$FAZ_Acrony, faz$PID, unique))]
 
 
-faz <- thinPolys(faz, tol = 1)
+# faz <- thinPolys(faz, tol = 1)
 # Darker red = higher proportion threatened
 colThreat <- data.frame(
 	threatIncrease = seq(-0.99, 1, 0.02),
@@ -520,16 +521,16 @@ write.csv(threatTable, file = "output/threatTable.csv")
 #------------------------------------------------------------------------------
 pdf(file = "figures/mostVulnerable36.pdf", width = 6.3, height = 2.8, pointsize = 10)
 
-for(j in 1:nrow(inds)){
-# s <- which(speciesNames == "Sockeye")
-# i <- which(fazNames == "UFR")
-# h <- which(habNames == "NonForestRoadsDEN_km_km2")
+# for(j in 1:nrow(inds)){
+# s <- inds[j, 1]
+# i <- inds[j, 2]
+# h <- inds[j, 3]
 
-s <- inds[j, 1]
-i <- inds[j, 2]
-h <- inds[j, 3]
-	
-# quartz(width = 6.3, height = 2.8, pointsize = 10)
+s <- which(speciesNames == "Chinook")
+i <- which(fazNames == "EVI")
+h <- which(habNames == "AgriculturePCT")
+
+quartz(width = 6.3, height = 2.8, pointsize = 10)
 par(mfrow = c(1,3), mar = c(4,4,2,1), oma = c(0,0,3,0))
 
 ind.is <- which(popDat$SPECIES == speciesNames[s] & popDat$FAZ == fazNames[i])
@@ -564,14 +565,16 @@ legend("topleft", fill = c(grey(0.8), "#00000060"), border = c(grey(0.6), 1), bt
 plot(pressure_inc, pThreat[1, , s, i, h], "l", xlab = "% increase in pressure value", ylab = "Proportion threatened", ylim = c(0,1), bty = "l", xaxs = "i")
 segments(x0 = 0.5, x1 = 0.5, y0 = 0, y1 = pThreat[1, which(pressure_inc == 0.5), s, i, h], lty = 2)
 segments(x0 = 0.5, x1 = 0, y0 = pThreat[1, which(pressure_inc == 0.5), s, i, h], y1 = pThreat[1, which(pressure_inc == 0.5), s, i, h], lty = 2)
-segments(x0 = 0, x1 = 0.5, y0 = pThreat[1, 1, s, i, h], y1 = pThreat[1, 1, s, i, h], lty = 2, col = grey(0.6))
+# segments(x0 = 0, x1 = 0.5, y0 = pThreat[1, 1, s, i, h], y1 = pThreat[1, 1, s, i, h], lty = 2, col = grey(0.6))
+axis(side =2, at = pThreat[1, 1, s, i, h], col = grey(0.6), las =1)
+
 mtext(side = 3, line = 0.5, adj = 0, "f)")
 
 mtext(side = 3, outer = TRUE, paste("Vulnerability of", speciesNames[s], "in", fazNames[i], "to", habNames4[h]), line = 1)
 
-}
-
-dev.off()
+# }
+# 
+# dev.off()
 #------------------------------------------------------------------------------
 # Across all FAZs, weighted by the number of populations in each FAZ
 #------------------------------------------------------------------------------
@@ -608,3 +611,32 @@ for(s in 1:nSpecies){
 	abline(v = 0)
 	abline(v = threatened[s], lty = 2)
 }
+
+
+
+
+
+
+
+
+
+
+###############################################################################
+# Chat with Doug May 3, 2022
+###############################################################################
+s <- which(speciesNames == "Coho")
+h <- which(habNames == "STRMXDEN")
+i <- which(fazNames == "LFR")
+# Lower Fraser Coho
+
+hist(y_pred[1, s, i, h, ], yaxs = "i", main = "", xlab = "Predicted trend", breaks = seq(-0.2, 0.35, 0.01))
+# hist(y_pred[which(pressure_inc == 0.50), s, i, h, ], add = TRUE, col = "#dd412450", border = "#dd4124", breaks = seq(xR[1], xR[2], length.out = 30))
+abline(v = threatened[s], lty = 2, lwd = 2)
+abline(v = 0, lwd = 2)
+par(new = TRUE)
+hist(popDat$trend3[which(popDat$FAZ == "LFR" & popDat$SPECIES == "Coho")], col = "#dd412450", border = "#dd4124", breaks = seq(-0.2, 0.35, 0.01), yaxs = "i", main = "", yaxt = "n")
+axis(side = 4, col = 2)
+
+legend("topright", fill = c(grey(0.8), "#dd4124"), legend =c("Predicted", "Observed"), bty ="n")
+
+popDat[which(popDat$FAZ == "LFR" & popDat$SPECIES == "Coho"), ]
