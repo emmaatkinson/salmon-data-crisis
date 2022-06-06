@@ -20,41 +20,82 @@ source("loadResults.R")
 # fit = raw MCMC output from jags.fit()
 # out = de-listed fit, with dimension (3, 50000, 333) = (chains, iterations, 
 # parameters)
+
 #--------------------------------------------------------------------
 # What are the pressure increases  we're interested in?
 #--------------------------------------------------------------------
 
-# Different increases for indicators that are percent of watershed
-# from those that are density
-
 # Summary of indicators used in analysis
 hab <- read.csv("data/pse_habitatpressurevalues_2018_disaggregated_grid14fixed.csv")
 dd <- read.csv("data/forest_disturbance_dd.csv")
+
 # Remove Data Deficient watersheds for forest disturbance
 hab <- hab[which(hab$WTRSHD_FID %in% dd$wtrshd_fid == FALSE), ]
+
+
 hab <- hab[, match(habNames, names(hab))]
+
+# Change MPB NAs to zero
 hab$MPB_pct[is.na(hab$MPB_pct)] <- 0
+
+# Set hab indicators slightly less than zero to zero
 hab[which(hab < 0, arr.ind = TRUE)] <- 0
+
+# Summarize mean, min, max, and quantiles for each habitat indicator
 habSummary <- data.frame(
-	indicator = habNames, 
-	mean = apply(hab, 2, mean, na.rm = TRUE), 
+	indicator = habNames,
+	mean = apply(hab, 2, mean, na.rm = TRUE),
 	min = apply(hab, 2, min, na.rm = TRUE),
 	t(apply(hab, 2, quantile, c(0.025, 0.25, 0.50, 0.75, 0.975))),
 	max = apply(hab, 2, max, na.rm = TRUE)
 )
 
-write.csv(habSummary, file = "habSummary.csv")
-# For percent, increase from 0 to 100%
+habSummaryTable <- data.frame(
+	indicator = habNames,
+	distribution = paste0(sprintf('%.2f', apply(hab, 2, mean, na.rm = TRUE)), " (",  sprintf('%.2f', apply(hab, 2, quantile, 0.5, na.rm = TRUE)), ", ", sprintf('%.2f', apply(hab, 2, quantile, 0.975, na.rm = TRUE)), ")")
+)
+# write.csv(habSummaryTable, file = "habSummaryTable.csv")
+
+max_inc <- numeric(nHab); names(max_inc) <- habNames
+for(i in 1:nHab) max_inc[i] <- quantile(hab[, i], 0.975)
+
+#--------------
+# Supplemental figure showing distributions of pressure values
+#--------------
+# quartz(width = 8, height = 5, pointsize = 10)
+# par(mfrow = c(2,5), mar = c(4,2,1,1), oma =c(0,3,1,0))
+# for(i in 1:nHab){
+# 	if(i %in% den) breaks <- seq(0, max(hab[, i]), length.out = 100) else breaks = c(-1:100)
+# 	hist(hab[which(hab[, i] > 0), i], main = habNames2[i], xlab = "", ylab = "", breaks = breaks, border =NA, yaxs = "i", xaxs = "i")
+# 	# hist(hab[which(hab[, i] > 0), i], add = TRUE, col = "#FF000050", border = NA, breaks = breaks)
+# 	u <- par('usr')
+# 	arrows(max_inc[i], u[3] + 0.6*(u[4] - u[3]), max_inc[i], u[3], col = 2, length = 0.08)
+# 	text(max_inc[i], u[3] + 0.6*(u[4] - u[3]), round(max_inc[i], 2), xpd = NA, pos = 4, col = 2, font = 2)
+# 	
+# 	arrows(habSummary$mean[i], u[3] + 0.8*(u[4] - u[3]), habSummary$mean[i], u[3], col = 4, length = 0.08)
+# 	text(habSummary$mean[i], u[3] + 0.8*(u[4] - u[3]), round(habSummary$mean[i], 2), xpd = NA, pos = 4, col = 4, font = 2)
+# 	
+# 	arrows(habSummary$max[i], u[3] + 0.4*(u[4] - u[3]), habSummary$max[i], u[3], length = 0.08)
+# 	text(habSummary$max[i], u[3] + 0.4*(u[4] - u[3]), round(habSummary$max[i], 2), xpd = NA, pos = 2, font = 2)
+# 	}
+# mtext(side = 1, outer = TRUE, "Pressure value", line = -1)
+# mtext(side = 2, outer = TRUE, "Number of watersheds", line = 1)
+
+# Index to be able to track which indicators are percentages and which
+# are densities
 pct <- c(1, 2, 3, 8, 9, 10)
 den <- c(4, 5, 6, 7)
 
-pressure_inc <- seq(0, 1, 0.02) 
-max_x <- c(rep(100, 3), 2*habSummary$max[den], rep(100, 3)); names(max_x) <- habNames
+# v9: Increase all pressure indicators as a percentage of the 75th quantile
+pressure_inc <- seq(0, 1, 0.02) %*% t(max_inc)
+max_x <- numeric(length(habNames)); names(max_x) <- habNames
+max_x[pct] <- 100
+max_x[den] <- habSummary$max[den] + pressure_inc[den]
 
 # For density, increase from current to 100% * most impacted (i.e., habSummary$max)
 
 #--------------------------------------------------------------------
-# Setup parameters for random selection of MCNC output
+# Setup parameters for random selection of MCMC output
 #--------------------------------------------------------------------
 
 n <- 10000 # Number of draws
@@ -122,8 +163,8 @@ for(s in 1:nSpecies){
 
 y_pred <- array(
 	data = NA, 
-	dim = c(length(pressure_inc), nSpecies, nFAZ, nHab, n), 
-	dimnames = list(NULL, speciesNames, fazNames, habNames, NULL))
+	dim = c(2, nSpecies, nFAZ, nHab, n), 
+	dimnames = list(c("current_pressure", "increase_pressure"), speciesNames, fazNames, habNames, NULL))
 
 
 #--------------------------------------------------------------------
@@ -160,27 +201,17 @@ for(s in 1:nSpecies){
 					# Pressure value for focal indicator:
 					x <- JAGSdat$habPressures[cbind(indDat, rep(h, n))]
 					
-					# Sim
-					for(p in 1:length(pressure_inc)){
-						
-						if(h %in% den){ # If pressure value is a density
-							# Add 0 - 100% of the most impacted watershed
-							y_pred[p, s, i, h, ] <- status + Beta * pmin(x + (pressure_inc[p])*habSummary$max[h], max_x[h]) + apply(BetaXOther, 1, sum)
-						
-							} else { # If percent watershed, then add
-							# Add percentages up to a max of 100%
-								y_pred[p, s, i, h, ] <- status + Beta * pmin(x + 100*pressure_inc[p], max_x[h]) + apply(BetaXOther, 1, sum)
-						}
-					} # end p
+					# Sim. current pressure
+					y_pred[1, s, i, h, ] <- status + Beta * x + apply(BetaXOther, 1, sum)
+					
+					# Sim. increased pressure
+					y_pred[2, s, i, h, ] <- status + Beta * max_inc[h] + apply(BetaXOther, 1, sum)
+	
 					
 					# # Check plot
-					# par(mfrow = c(2,2), mar = c(4,4,2,1))
-					# for(p in 1:4){
-					# 	hist(y_pred[p, s, i, h, ], xlim = range(y_pred[1:3, s, i, h, ]), xlab = "", ylab = "", main = c("current", "+10%", "+20%", "+50%")[p])
-					# 	abline(v = c(threatened, endangered), col = 2, lwd = 1.5, lty  = c(2,1))
-					# }
-					# 
-					
+					# breaks <- seq(min(y_pred[, s, i, h, ]), max(y_pred[, s, i, h, ]), length.out = 100)
+					# hist(y_pred[1, s, i, h, ], breaks = breaks)
+					# hist(y_pred[2, s, i, h, ], add = TRUE, col = "#FF000040", border = "#00000040", breaks = breaks)
 
 				} #end h
 				
@@ -190,6 +221,7 @@ for(s in 1:nSpecies){
 
 # saveRDS(y_pred, file = "output/predictedTrend_forRiskAssessment.rds")
 y_pred <- readRDS("output/predictedTrend_forRiskAssessment.rds")
+
 #--------------------------------------------------------------------
 # Calculate % threatened and endangered
 #--------------------------------------------------------------------
@@ -210,78 +242,23 @@ endangered <- log(0.3)/G
 
 pThreat <- array(
 	data = NA, 
-	dim = c(2, length(pressure_inc), nSpecies, nFAZ, nHab), 
+	dim = c(2, nSpecies, nFAZ, nHab), 
 	dimnames = list(
-		c("threatened", "endangered"), 
-		NULL, 
+		c("current_pressure", "increased_pressure"), 
 		speciesNames, 
 		fazNames, 
 		habNames))
 
 for(s in 1:nSpecies){
 	for(i in 1:nFAZ){
-		for(p in 1:length(pressure_inc)){
+		for(p in 1:2){
 			for(h in 1:nHab){
-				pThreat[1, p, s, i, h] <- length(which(y_pred[p, s, i, h, ] < threatened[s]))/n
-				pThreat[2, p, s, i, h] <- length(which(y_pred[p, s, i, h, ] < endangered[s]))/n
-			}}}}
+				pThreat[p, s, i, h] <- length(which(y_pred[p, s, i, h, ] < threatened[s]))/n
+				}}}}
 
-
-###############################################################################
-# Plotting
-###############################################################################
-habCol <- pnw_palette("Bay", nHab)
-
-s <- 5
-i <- 13
-par(mfrow = c(1,2))
-
-# Threatened
-plot(pressure_inc, pThreat[1, , s, i, 1], "n", ylim = c(0,1))
-for(h in 2:10) lines(pressure_inc, pThreat[1, , s, i, h], col = habCol[h])
-
-# Endangered
-plot(pressure_inc, pThreat[2, , s, i, 1], "n", ylim = c(0,1))
-for(h in 2:10) lines(pressure_inc, pThreat[2, , s, i, h], col = habCol[h])
 
 #------------------------------------------------------------------------------
-# Plot each indicator separately 
-#------------------------------------------------------------------------------
-
-quartz(width = 7, height = 6, pointsize = 10)
-par(mfrow = c(3,4), mar = c(3,3,0,0), oma = c(2,2,3,2))
-for(h in 1:10){
-	plot(pressure_inc, pThreat[1, , s, i, h], "l", ylim = c(0,1))
-	lines(pressure_inc, pThreat[2, , s, i, h], col = 2)
-	mtext(side = 3, line = -2, habNames2[h])
-}
-mtext(side = 3, outer=TRUE, paste0(speciesNames[s], ": ", fazNames[i]), line = 1, cex = 1.5)
-plot(1,1,"n", bty = "n", xaxt = "n", yaxt = "n")
-legend("center", col = c(1,2), pch = 1, lwd = 1, c("Threatened", "Endangered"), bty = "n")
-mtext(side = 1, outer = TRUE, "Percent increase in pressure value")
-mtext(side = 2, outer = TRUE, "Proportion of populations threatened or endangered")
-
-#------------------------------------------------------------------------------
-# 
-#------------------------------------------------------------------------------
-pdf(width = 7, height = 6, pointsize = 10)
-par(mfrow = c(3,4), mar = c(3,3,0,0), oma = c(2,2,3,2))
-
-for(s in 1:nSpecies){
-	for(i in 1:nFAZ){
-		for(h in 1:10){
-			
-			# Plot only those that have a change in proportion of > 5%
-			if(tail(pThreat[1, , s, i, h], 1) - head(pThreat[1, , s, i, h], 1) >= 0.10 & tail(pThreat[1, , s, i, h], 1) > 0.6){
-				plot(pressure_inc, pThreat[1, , s, i, h], "l", ylim = c(0,1))
-				lines(pressure_inc, pThreat[2, , s, i, h], col = 2)
-				mtext(side = 3, line = -1, paste0(speciesNames[s], ": ", fazNames[i], ": ", habNames2[h]), cex = 0.7)
-			}
-}}}
-dev.off()
-	
-#------------------------------------------------------------------------------
-# Maps, for each species and impact
+# Table: Which species, FAZ's and threats are sensitive
 #------------------------------------------------------------------------------
 
 # What is the *change* in probability of being threatened for a 50% increase in 
@@ -291,12 +268,76 @@ threatIncrease <- array(NA, dim = c(nSpecies, nFAZ, nHab), dimnames = list(speci
 for(s in 1:nSpecies){
 	for(i in 1:nFAZ){
 		for(h in 1:10){
-			threatIncrease[s, i, h] <- pThreat[1, which(pressure_inc == 0.50), s, i, h] - pThreat[1, which(pressure_inc == 0), s, i, h]
+			threatIncrease[s, i, h] <- pThreat[2, s, i, h] - pThreat[1, s, i, h]
 		}}}
+
+# More than >=50% increase in threatened with a 50% increase in pressure
+# and >80% ofpopulations threated with a 50% increase in pressure
+# If there is currently no pressure, mark with asterix
+
+inds <- which(threatIncrease >= 0.5, arr.ind = TRUE)
+inc <- list(
+	bySpecies = tapply(inds[, 1], inds[, 1], length),
+	byFAZ = tapply(inds[, 1], inds[, 2], length),
+	byThreat = tapply(inds[, 1], inds[, 3], length))
+names(inc$bySpecies) <- speciesNames
+names(inc$byFAZ) <- fazNames[as.numeric(names(inc$byFAZ))]
+names(inc$byThreat) <- habNames[as.numeric(names(inc$byThreat))]
+
+
+hist(pThreat[cbind(rep(2, nrow(inds)), inds)])
+
+
+inds2 <- inds[which(pThreat[cbind(rep(2, nrow(inds)), inds)] > 0.8), ]
+dim(inds)
+
+# dims: s, i, h
+# Create table of just those with pThreat > 0.7 -> inds2
+tableInd <- inds2
+
+popInd_inc <- list()
+currrentPressureValues <- array(NA, dim = c(nrow(tableInd), 3), dimnames = list(NULL, c("mean", "min", "max")))
+for(i in 1:nrow(tableInd)){
+	popDat_inc[[i]] <- which(popDat$SPECIES == speciesNames[tableInd[i,1]] & popDat$FAZ == fazNames[tableInd[i,2]])
+	currrentPressureValues[i, 1] <- mean(JAGSdat$habPressures[popDat_inc[[i]], tableInd[i,3]])
+	currrentPressureValues[i, 2] <- min(JAGSdat$habPressures[popDat_inc[[i]], tableInd[i,3]])
+	currrentPressureValues[i, 3] <- max(JAGSdat$habPressures[popDat_inc[[i]], tableInd[i,3]])
+	
+}
+
+# Put together
+threatTable <- data.frame(
+	species = speciesNames[tableInd[, 1]],
+	FAZ = fazNames[tableInd[, 2]],
+	indicator = habNames4[tableInd[, 3]],
+	
+	nP = nPop[tableInd[, c(1,2)]],
+	nSlope = nSlope2[tableInd[,c(1,3,2)]],
+	
+	currrentPressureValue = paste0(sprintf('%.2f', currrentPressureValues[, 1]), " (", sprintf('%.2f', currrentPressureValues[, 2]), ", ", sprintf('%.2f', currrentPressureValues[, 3]), ")"),
+	curppnThreatened = pThreat[cbind(rep(1, nrow(tableInd)), tableInd)],
+	
+	incPressureValye = sprintf('%.2f', max_inc[tableInd[, 3]]),
+	incppnThreatened = pThreat[cbind(rep(2, nrow(tableInd)), tableInd)],
+	
+	change = threatIncrease[tableInd]
+)
+threatTable <- threatTable[order(threatTable$species, threatTable$change, decreasing = c(FALSE, TRUE), method = "radix"), ]
+
+write.csv(threatTable, file = "output/threatTable.csv")
+
+###############################################################################
+# Plotting
+###############################################################################
+
+	
+#------------------------------------------------------------------------------
+# Maps, for each species and impact
+#------------------------------------------------------------------------------
 
 # Load spatial packages
 library(PBSmapping)
-gshhg <- "~/Google Drive/Mapping/gshhg-bin-2.3.7/"
+gshhg <- "~/Documents/Mapping/gshhg-bin-2.3.7/"
 xlim <- c(-135, -118) + 360
 ylim <- c(48, 58)
 
@@ -482,38 +523,7 @@ for(i in focalFAZ){
 segments(x0 = c(-3.781119, -3.683241), x1 = c(-2.700872, -2.732900), y0 = c(1.3386811, 0.8162466), y1 = c(2.9864691, 1.2579034), lwd = 1.2, xpd = NA)
 
 
-#------------------------------------------------------------------------------
-# Table: Which species, FAZ's and threats are sensitive
-#------------------------------------------------------------------------------
-# More than >=50% increase in threatened with a 50% increase in pressure
-# and >80% ofpopulations threated with a 50% increase in pressure
-# If there is currently no pressure, mark with asterix
 
-inds <- which(threatIncrease >= 0.5, arr.ind = TRUE)
-inc <- tapply(inds[, 1], inds[,1], length)
-names(inc) <- speciesNames
-inc
-
-inds <- inds[which(pThreat[cbind(rep(1, nrow(inds)), rep(which(pressure_inc == 0.5), nrow(inds)), inds)] > 0.8), ]
-# dims: s, i, h
-dim(inds)
-
-dim(nSlope2)
-nSlope2[inds[,c(1,3,2)]]
-
-threatTable <- data.frame(
-	species = speciesNames[inds[, 1]],
-	FAZ = fazNames[inds[, 2]],
-	indicator = habNames4[inds[, 3]],
-	currentppnThreatened = pThreat[cbind(rep(1, nrow(inds)), rep(which(pressure_inc == 0), nrow(inds)), inds)],
-	ppnThreatened50 = pThreat[cbind(rep(1, nrow(inds)), rep(which(pressure_inc == 0.5), nrow(inds)), inds)],
-	increase = threatIncrease[inds],
-	nP = nPop[inds[, c(1,2)]],
-	nSlope = nSlope2[inds[,c(1,3,2)]]
-)
-threatTable <- threatTable[order(threatTable$species, threatTable$increase, decreasing = c(FALSE, TRUE), method = "radix"), ]
-
-write.csv(threatTable, file = "output/threatTable.csv")
 
 #------------------------------------------------------------------------------
 # Look at beta, and distribution of trends for certain combinations of 
