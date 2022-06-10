@@ -80,12 +80,15 @@ nHab <- length(habNames)
 # fit <- readRDS("output/fit_model10_centeredSO_20210512.rds") #This one actually convered better
 # fit <- readRDS("output/fit_model10_centeredSO_20210609_3chains0.rds") # Three longer chains had total convergence; 0 is for the fits with negative pressures corrected to zero
 fit <- readRDS("output/fit_coho3_20211029.rds") # Fit from Oct 2021 changing coho age-at-return to 3 years
-
-rHat <- gelman.diag(fit) # Takes a long time on new Mac...?
 cn <- colnames(fit[[1]])
 
-S <- summary(fit)
+# rHat <- gelman.diag(fit) # Takes a long time on new Mac...?
+# saveRDS(rHat, file = "output/fit_rHat.rds")
+rHat <- readRDS("output/fit_rHat.rds")
 
+# S <- summary(fit)
+# saveRDS(S, file = "output/fitSummary.rds")
+S <- readRDS("output/fitSummary.rds")
 #-----------------------------------------------------------------------------
 # Delist results for easy summary of range etc. among chains
 #-----------------------------------------------------------------------------
@@ -135,3 +138,4 @@ rHat[[1]][outInd$beta1]
 
 # Table of parameter estimates
 # write.csv(S[[1]], "output/parEst.csv")
+
