@@ -1,5 +1,10 @@
-##############################################################################
 ###############################################################################
+###############################################################################
+#
+# Testing for broad-scale relationships between freshwater habitat pressure 
+# indicators and Pacific salmon population trends
+# Stephanie Peacock <speacock@psf.ca>
+#
 #
 # Functions used in exploring and compiling nuSEDS CU data
 # 

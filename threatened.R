@@ -1,13 +1,14 @@
 ###############################################################################
 ###############################################################################
 #
-# Quantifying the relationship between population trends and freshwater habitat
+# Testing for broad-scale relationships between freshwater habitat pressure 
+# indicators and Pacific salmon population trends
 # Stephanie Peacock <speacock@psf.ca>
 #
 # This code takes the model object from `fitting.R` and samples from the 
-# posterior and data to calculate the sensitivity, exposure, and vulnerability 
-# of different salmon species and Freshwater Adaptive Zones (FAZs) throughout BC.
-# Produces large dot plots for main report showing these metrics.
+# posterior and data to calculate the vulnerability 
+# of different salmon species and Freshwater Adaptive Zones (FAZs) 
+# to further increases in pressures.
 #
 ###############################################################################
 ###############################################################################

@@ -1,7 +1,8 @@
 ###############################################################################
 ###############################################################################
 #
-# Quantifying the relationship between population trends and freshwater habitat
+# Testing for broad-scale relationships between freshwater habitat pressure 
+# indicators and Pacific salmon population trends
 # Stephanie Peacock <speacock@psf.ca>
 #
 # This code loads to .rds file of MCMC output from model fits to produce a 
@@ -202,6 +203,7 @@ par(xpd = FALSE)
 # dev.off()
 
 # With legend
+rearNames2 <- c("Ocean-type Chinook", "Stream-type Chinook", "Chum", "Coho", "Pink", "Lake-type sockeye", "River-type sockeye")
 pdf(file = "figures/intercept_allMAZ_legend.pdf", width = 7.5, height = 6, pointsize = 10)
 # png("figures/intercept_allMAZ_legend.png", width = 1125, height = 900, res = 150, pointsize = 10)
 # quartz(width = 7.5, height = 6, pointsize = 10)
@@ -217,7 +219,7 @@ for(r in 1:nRear){
 		# polygon(x = c(d.i$x, rev(d.i$x)), y = c((r - 1) + d.i$y/100, rep(r, length(d.i$y))), border = NA, col = paste0(mazCol[i], 50))
 		lines(d.i$x, r + d.i$y/120, col = mazCol[i], lwd = 1.5)
 	} # end i
-	text(par('usr')[1], r+0.8, pos = 4, rearNames[r], adj = 0)
+	text(par('usr')[1], r+0.8, pos = 4, rearNames2[r], adj = 0)
 	if(r > 1) abline(h = r)
 } # end r
 
@@ -305,7 +307,7 @@ for(h in 1:nHab){
 	text(u[1], u[4] - (u[4] - u[3])*seq(0.8, 3.8, 1)*0.09, apply(nSlope[,h,], 1, sum), col = spawnCol, pos = 4, font = 2)
 	
 }
-mtext(side = 1, outer=TRUE, expression(paste("Fixed slope for modal stream order of 4 (", beta[1], ")", sep = "")), line = 0.5)
+mtext(side = 1, outer=TRUE, expression(paste("Fixed slope (", beta[1], ") for modal stream order of 4 ", sep = "")), line = 0.5)
 mtext(side = 2, line = 1, outer=TRUE, "Marginal posterior density")
 
 

@@ -1,7 +1,8 @@
 ###############################################################################
 ###############################################################################
 #
-# Quantifying the relationship between population trends and freshwater habitat
+# Testing for broad-scale relationships between freshwater habitat pressure 
+# indicators and Pacific salmon population trends
 # Stephanie Peacock <speacock@psf.ca>
 #
 # This code loads to .rds file of MCMC output from model fits and creates some

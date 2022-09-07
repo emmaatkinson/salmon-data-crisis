@@ -1,6 +1,13 @@
 ###############################################################################
+###############################################################################
+#
+# Testing for broad-scale relationships between freshwater habitat pressure 
+# indicators and Pacific salmon population trends
+# Stephanie Peacock <speacock@psf.ca>
+#
 # Load population data from output of dataCompilationNuSEDS_CU.R
 # For use in model fitting and plotting.
+###############################################################################
 ###############################################################################
 
 ###############################################################################

@@ -1,6 +1,10 @@
 ##############################################################################
 ###############################################################################
 #
+# Testing for broad-scale relationships between freshwater habitat pressure 
+# indicators and Pacific salmon population trends
+# Stephanie Peacock <speacock@psf.ca>
+#
 # Compiling escapement data and performing quality control
 #
 # Data were downloaded from Open Data Canada
@@ -240,7 +244,7 @@ nusedsCU <- rbind(nusedsCU, addYrs)
 # Check that all duplicates have been dealt with:
 unique(tapply(paste(nusedsCU$SQ_POP_ID, nusedsCU$ANALYSIS_YR, sep = ":"), paste(nusedsCU$SQ_POP_ID, nusedsCU$ANALYSIS_YR, sep = ":"), length)) # SHould be one.
 
-popFiltered <- recordStep(popFiltered, newDescr = "Removed duplicate records, dis/aggregsated populations")
+popFiltered <- recordStep(popFiltered, newDescr = "Removed duplicate records, dis/aggregated populations")
 
 #-----------------------------------------------------------------------------
 # (5) Remove populations with HIGH enhancement in PSE
@@ -674,32 +678,3 @@ unique(popDat$rearEco)
 popDat <- cbind(popDat, hab[match(wsd$WTRSHD_FID[match(nusedsCU$POP_ID[popInd], wsd$POP_ID)], hab$WTRSHD_FID), c('AgriculturePCT', 'UrbanPCT', 'RIPDSTPCT', 'Linear_Dev_noRoads', 'ForestRoadsDEN_km_km2', 'NonForestRoadsDEN_km_km2', 'STRMXDEN', 'FORDST_PCT', 'ECAPCT', 'MPB_pct', 'WATER_LIC', 'WWD_count')])
 
 write.csv(popDat, file = "data/popDat.csv")
-
-# ###############################################################################
-# ###############################################################################
-# # Create spawner-level data list (for full JAGS model)
-# ###############################################################################
-# ###############################################################################
-# 
-# # For spawners and years, we really want these in matrices so that they can be easily referenced
-# 
-# # Number of years of data for each population
-# spawner_nt = tapply(nusedsCU$ANALYSIS_YR, nusedsCU$SQ_POP_ID, length)
-# 
-# spawnersMat <- matrix(NA, nrow = nPop, ncol = max(spawner_nt))
-# analysis_yrMat <- matrix(NA, nrow = nPop, ncol = max(spawner_nt))
-# for(i in 1:nPop){
-# 	pop.i <- which(nusedsCU$SQ_POP_ID == spid[i])
-# 	spawnersMat[i, 1:spawner_nt[i]] <- nusedsCU$smoothedMAX_ESTIMATE[pop.i]
-# 	analysis_yrMat[i, 1:spawner_nt[i]] <- nusedsCU$ANALYSIS_YR[pop.i]
-# }
-# 
-# spawnerDat <- list(
-# 	POP_ID = pid,
-# 	SPECIES_QUALIFIED = nusedsCU$SPECIES_QUALIFIED[popInd],
-# 	spawner_nt = spawner_nt,
-# 	spawnersMat = spawnersMat,
-# 	analysis_yrMat = analysis_yrMat
-# 	)
-# 
-# saveRDS(spawnerDat, file = "spawnerDat.rds")

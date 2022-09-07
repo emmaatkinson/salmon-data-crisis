@@ -1,11 +1,19 @@
 ###############################################################################
-# Fitting approach #1:
+###############################################################################
+#
+# Testing for broad-scale relationships between freshwater habitat pressure 
+# indicators and Pacific salmon population trends
+# Stephanie Peacock <speacock@psf.ca>
+#
+# Model fitting approach:
 # a) Use previously estimated trends that were calculated in 
 #    dataCompilationNuSEDS_CU.R
 #    using simple lm(log(smoothedMAX_ESTIMATE + 1) ~ ANALYSIS_YR)
 #    for each population.
 # b) Fit model relating population trends to habitat pressure in JAGS to allow
 #    for more flexibility and diagnostics.
+#
+###############################################################################
 ###############################################################################
 
 library(dclone)
@@ -44,9 +52,71 @@ JAGSdat <- list(
 # Define model
 ###############################################################################
 
-source("models.R")
+model <- function(){
+	
+	#-----------------------------------------------------------------------------
+	# Priors on parameters
+	sigma ~ dlnorm(-1, pow(1, -2))
+	
+	# Intercept for pop-hab relationship
+	beta0 ~ dnorm(0, pow(3, -2))
+	
+	# Standard deviation among coastal regions
+	sigmaMAZ ~ dlnorm(-1, pow(1, -2))
+	
+	for(j in 1:nHab){
+		# Standard deviation among FAZ's (different for each habitat variable)
+		sigmaFAZ[j] ~ dlnorm(-1, pow(1, -2))
+		
+		# Strength of popHab relationship
+		# Different for each habitat pressure, FW ecotype (7), and stream order.
+		for(i in 1:nSpawn){
+			beta1[i, j] ~ dnorm(0, pow(3, -2))
+		}
+		
+		phi[j] ~ dnorm(0, pow(3, -2))
+		
+	}
+	
+	#-----------------------------------------------------------------------------
+	# Random effects
+	for(j in 1:nMAZ){
+		for(k in 1:nRear){
+			thetaMAZ[j, k] ~ dnorm(0, pow(sigmaMAZ, -2))
+		}}
+	
+	for(j in 1:nHab){
+		for(k in 1:nFAZ){
+			thetaFAZ[k, j] ~ dnorm(0, pow(sigmaFAZ[j], -2))
+		}}
+	
+	#-----------------------------------------------------------------------------
+	# Link to habitat data
+	# Intercept
+	for(i in 1:nPop){
+		
+		for(j in 1:nHab){
+			slopeBeta[i, j] <- beta1[spawnEco[i], j] + phi[j] * streamOrder[i] + thetaFAZ[faz[i], j]
+		}
+		
+		trendPred[i] <- beta0	+ thetaMAZ[maz[i], rearEco[i]] + inprod(slopeBeta[i, ], t(habPressures[i, ]))
+		
+	}
+	
+	#-----------------------------------------------------------------------------
+	# Likelihood
+	for(i in 1:nPop){
+		trend[i] ~ dnorm(trendPred[i], pow(sigma, -2) * weight[i])
+		
+		# Track log-likelihood for model evaluation
+		log_lik0[i] <- logdensity.norm(trend[i], trendPred[i], pow(sigma, -2) * weight[i])
+	}
+	
+	log_lik <- sum(log_lik0)
+	
+} # end model
 
-model <- model_10
+
 
 ###############################################################################
 # Fitting
