@@ -158,7 +158,7 @@ for(i in 1:nMAZ){
 # What are the densities of intercepts including RE for r/MAZ?
 #--------------------------------------------------------------------
 d.beta0 <- density(out[, , outInd$beta0])
-# quartz(pointsize =10, width=9, height = 4)
+# quartz(pointsize = 10, width=9, height = 4)
 pdf("figures/intercept.pdf", width = 9, height = 4, pointsize = 10)
 for(r in 1:nRear){
 	
@@ -484,14 +484,9 @@ axis(side = 2, at = c(1:8), labels = fazNames[Q], las = 1)
 # }
 
 ###############################################################################
-# Risk assessment
+# Plotting exposure, sensitivity, threat based on current pressure values 
+# Fig 4 and Appendix C
 ###############################################################################
-
-# For each FAZ, look at RISK
-# -> pressure + vulnerability
-
-# For example sockeye
-# For each FAZ, calculate mean and range in risk from each pressure
 
 regionNames <- sort(unique(popDat$region))
 speciesNames <- sort(unique(popDat$SPECIES))
@@ -505,8 +500,8 @@ indMod <- cbind(
 	sample(1:numChains, size = n, replace = TRUE), 
 	sample(1:numIter, size= n, replace = TRUE))
 
-# Setup array to hold MCMC estimates of risk
-risk <- array(NA,
+# Setup array to hold MCMC estimates of threat (exposure * sensitivity)
+threat <- array(NA,
 							dim = c(nFAZ, nSpecies, nHab, n),
 							dimnames = list(fazNames, speciesNames, habNames, NULL))
 
@@ -519,22 +514,23 @@ for(i in 1:nFAZ){
 		if(length(ind.is) > 0){
 			indDat <- sample(ind.is, size = n, replace = TRUE)
 
-			for(i in 1:n){
+			for(j in 1:n){
 
 				beta1 <- numeric(10)
 				for(h in 1:10){
-					beta1[h] <- out[indMod[i, 1], indMod[i, 2], outInd$beta1[match(popDat$spawnEco[indDat[i]], spawnNames), h]] + out[indMod[i, 1], indMod[i, 2], outInd$phi[h]] * popDat$StreamOrder[indDat[i]] + out[indMod[i, 1], indMod[i, 2], outInd$thetaFAZ[match(popDat$FAZ[indDat[i]], fazNames), h]]
+					beta1[h] <- out[indMod[j, 1], indMod[j, 2], outInd$beta1[match(popDat$spawnEco[indDat[j]], spawnNames), h]] + out[indMod[j, 1], indMod[j, 2], outInd$phi[h]] * popDat$StreamOrder[indDat[j]] + out[indMod[j, 1], indMod[j, 2], outInd$thetaFAZ[match(popDat$FAZ[indDat[j]], fazNames), h]]
 				}
 
-				risk[r, s, , i] <- as.numeric(beta1 * habPressures[indDat[i], ])
+				threat[i, s, , j] <- as.numeric(beta1 * habPressures[indDat[j], ])
 
-			} # end i
+			} # end j
 		}
 	}
 }
 
-# saveRDS(risk, file = "output/risk.rds")
-risk <- readRDS("output/risk.rds")
+# saveRDS(threat, file = "output/threat.rds")
+# threat <- readRDS("output/threat.rds")
+
 #------------------------------------------------------------------------------
 # Number of (non-zero) data points in each category
 #------------------------------------------------------------------------------
@@ -549,9 +545,9 @@ for(r in 1:nFAZ){
 		}}}
 
 #------------------------------------------------------------------------------
-# Summarize risk assessment
+# Summarize threats under current pressure values
 #------------------------------------------------------------------------------
-riskSummary <- array(NA, 
+threatSummary <- array(NA, 
 										 dim = c(nFAZ, nSpecies, nHab, 3), 
 										 dimnames = list(fazNames, speciesNames, habNames, c("mean", "li", "ui")))
 
@@ -559,8 +555,8 @@ for(r in 1:length(fazNames)){
 	for(s in 1:length(speciesNames)){
 		for(h in 1:10){
 			if(nSamp[r, s, h] > 0){
-				riskSummary[r, s, h, 1] <- mean(risk[r, s, h, ])
-				riskSummary[r, s, h, 2:3] <- quantile(risk[r, s, h, ], c(0.025,0.975))
+				threatSummary[r, s, h, 1] <- mean(threat[r, s, h, ])
+				threatSummary[r, s, h, 2:3] <- quantile(threat[r, s, h, ], c(0.025,0.975))
 			}
 			}}}
 
@@ -611,63 +607,6 @@ for(h in 1:nHab){
 # dev.off()
 
 write.csv(significantRisk, file = "output/significantRisk.csv")
-#------------------------------------------------------------------------------
-# Plot as map
-#------------------------------------------------------------------------------
-habNames3 <- c("agriculture", "urban development", "riparian disturbance", "linear development", "forestry roads", "non-forestry roads", "stream crossings", "forest disturbance", "ECA", "pine beetle defoliation")
-
-mapCol <- colorRampPalette(c(dotCol[1], "white", dotCol[2]))(n = 4)
-
-# Load spatial packages
-library(PBSmapping)
-gshhg <- "~/Google Drive/Mapping/gshhg-bin-2.3.7/"
-xlim <- c(-135, -118) + 360
-ylim <- c(48, 58)
-# five resolutions: crude(c), low(l), intermediate(i), high(h), and full(f).
-res <- "i"
-land <- importGSHHS(paste0(gshhg,"gshhs_", res, ".b"), xlim = xlim, ylim = ylim, maxLevel = 2, useWest = TRUE)
-rivers <- importGSHHS(paste0(gshhg,"wdb_rivers_", res, ".b"), xlim = xlim, ylim = ylim, useWest = TRUE)
-borders <- importGSHHS(paste0(gshhg,"wdb_borders_", res, ".b"), xlim = xlim, ylim = ylim, useWest = TRUE, maxLevel = 1)
-
-faz <- as.PolySet(read.csv("data/ignore/PSF/fazLL_thinned_inDat.csv"), projection = "LL")
-
-riskCat <- array(NA, dim = c(nSpecies, nHab, nFAZ), dimnames = list(speciesNames, habNames, fazNames))
-for(s in 1:nSpecies){
-	for(h in 1:nHab){
-		# Non-significant risk
-		riskCat[s, h, which(riskSummary[, s, h, 1] > 0)] <- 2
-		riskCat[s, h, which(riskSummary[, s, h, 1] < 0)] <- 3
-		
-		# Significant risk
-		sigFAZ <- which(significantRisk$species == speciesNames[s] & significantRisk$hab == habNames[h])
-		if(length(sigFAZ) > 0){
-			for(i in 1:length(sigFAZ)){
-				if(significantRisk$pos[sigFAZ[i]] == 1) riskCat[s, h, which(fazNames == significantRisk$FAZ[sigFAZ[i]])] <- 1 else  riskCat[s, h, which(fazNames == significantRisk$FAZ[sigFAZ[i]])] <- 4
-			}
-		}
-	} #end h
-	} # end s
-		
-#------
-pdf(file = "figures/RiskMaps.pdf", width = 6, height = 6, pointsize = 10)
-for(s in 1:nSpecies){
-	for(h in 1:nHab){
-		# Plot Map
-		plotMap(land, xlim = c(-135, -118), ylim = c(48.17, 58),	col = "white", bg = grey(0.8), las = 1, border = grey(0.6), lwd = 0.6, xaxt = "n", yaxt = "n", xlab = "", ylab = "")
-		addLines(rivers, col = grey(0.6))
-		addLines(borders)
-		for(i in 1:length(fazNames)){
-			if(is.na(riskCat[s, h, i])){
-				addPolys(faz[faz$FAZ_Acrony == fazNames[i], ])
-			} else {
-				addPolys(faz[faz$FAZ_Acrony == fazNames[i], ], border = mapCol[riskCat[s, h, i]], col = paste0(mapCol[riskCat[s, h, i]], "60"))
-			}
-		}
-		legend("bottomleft", bg = "white", fill = c(paste0(mapCol, 60), "white"), border = c(mapCol, 1), legend = c("Positive (significant)", "Positive (non-significant)", "Negative (non-significant)", "Negative (significant)", "No data"))
-		mtext(side = 3, paste0("Risk to ", speciesNames[s], " salmon from ", habNames3[h]), font = 2)
-	}}
-
-dev.off()
 
 #------------------------------------------------------------------------------
 # Plot risks for a species across FAZ and indicators 
@@ -693,199 +632,3 @@ mtext(side = 3, speciesNames[s])
 axis(side = 1, at = c(1:10), labels = habNames3, las = 2)
 }
 mtext(side = 2, outer = TRUE, "Freshwater Adaptive Zone (FAZ)", line = 5)
-# # Include some sort of risk score? Sum across all species?
-# fazRisk <- rep(22)
-# for(i in 1:22){
-# 	fazRisk[i] <- sum(riskSummary[i, , , 1], na.rm = TRUE)
-# }
-# 
-# text(10.5, c(nFAZ:1), round(fazRisk, 2), xpd = NA, pos = 4, col = dotCol[as.numeric(fazRisk < 0) + 1])
-
-# Organize by impact instead og species
-###############################################################################
-# Risk assessment: including intercept
-###############################################################################
-
-n <- 10000
-
-# Setup array to hold MCMC estimates of risk
-riskFull <- array(NA, 
-							dim = c(nFAZ, nSpecies, n), 
-							dimnames = list(fazNames, speciesNames, NULL))
-
-# Run risk calculation
-for(r in 1:nFAZ){
-	for(s in 1:nSpecies){
-		
-		# Select MCMC draws from data
-		ind.rs <- which(popDat$SPECIES == speciesNames[s] & popDat$FAZ == fazNames[r])
-		if(length(ind.rs) > 0){
-			indDat <- sample(ind.rs, size = n, replace = TRUE)
-			
-			for(i in 1:n){
-				
-				beta1 <- numeric(10)
-				for(h in 1:10){
-					beta1[h] <- out[indMod[i, 1], indMod[i, 2], outInd$beta1[match(popDat$spawnEco[indDat[i]], spawnNames), h]] + out[indMod[i, 1], indMod[i, 2], outInd$phi[h]] * popDat$StreamOrder[indDat[i]] + out[indMod[i, 1], indMod[i, 2], outInd$thetaFAZ[match(popDat$FAZ[indDat[i]], fazNames), h]]
-				}
-				
-				riskFull[r, s, i] <- out[indMod[i, 1], indMod[i, 2], outInd$beta0] + out[indMod[i, 1], indMod[i, 2], outInd$thetaMAZ[match(popDat$MAZ[indDat[i]], mazNames), match(popDat$rearEco[indDat[i]], rearNames)]] + sum(as.numeric(beta1 * habPressures[indDat[i], ]))
-				
-			} # end i
-		}
-	}
-}
-
-# saveRDS(riskFull, file = "output/riskFull.rds")
-riskFull <- readRDS("output/riskFull.rds")
-
-
-#------------------------------------------------------------------------------
-# Summarize risk assessment
-#------------------------------------------------------------------------------
-riskSummaryFull <- array(NA, 
-										 dim = c(nFAZ, nSpecies, 3), 
-										 dimnames = list(fazNames, speciesNames, c("mean", "li", "ui")))
-
-for(r in 1:length(fazNames)){
-	for(s in 1:length(speciesNames)){
-		if(sum(nSamp[r, s, ]) > 0){
-				riskSummaryFull[r, s, 1] <- mean(riskFull[r, s, ])
-				riskSummaryFull[r, s, 2:3] <- quantile(riskFull[r, s, ], c(0.025,0.975))
-			}
-		}}
-
-# Which risk combos are significant
-significantRiskFull <- data.frame(
-	pos = NA,
-	species = NA,
-	FAZ = NA)
-Q <- 0
-
-for(s in 1:nSpecies){
-	ns <- which(apply(riskFull[, s,  ], 1, quantile, c(0.025), na.rm = TRUE) > 0 | apply(riskFull[, s, ], 1, quantile, 0.975, na.rm = TRUE) < 0)
-		if(length(ns) > 0){
-			if(length(ns) > 1) y <- apply(riskFull[ns, s, ], 1, mean) else y <- mean(risk[ns, s, ])
-			significantRiskFull[(Q + 1):(Q + length(ns)), ] <- cbind(as.numeric(c(y > 0)), rep(speciesNames[s], length(ns)), fazNames[ns])
-		Q <- Q + length(ns)
-		}
-	}
-
-# Define risk categoies (sig pos, pos, neg, sig neg)
-riskCatFull <- array(NA, dim = c(nSpecies, nFAZ), dimnames = list(speciesNames, fazNames))
-for(s in 1:nSpecies){
-	# Non-significant risk
-		riskCatFull[s, which(riskSummaryFull[, s, 1] > 0)] <- 2
-		riskCatFull[s, which(riskSummaryFull[, s, 1] < 0)] <- 3
-		
-		# Significant risk
-		sigFAZ <- which(significantRiskFull$species == speciesNames[s])
-		if(length(sigFAZ) > 0){
-			for(i in 1:length(sigFAZ)){
-				if(significantRiskFull$pos[sigFAZ[i]] == 1) riskCatFull[s, which(fazNames == significantRiskFull$FAZ[sigFAZ[i]])] <- 1 else  riskCatFull[s, which(fazNames == significantRiskFull$FAZ[sigFAZ[i]])] <- 4
-			}
-		}
-} # end s
-
-#------------------------------------------------------------------------------
-# Plot as with beta1
-#------------------------------------------------------------------------------
-zz <- seq(0, 0.05, 0.01)
-
-quartz(width = 5, height = 5, pointsize = 10)
-par(mfrow = c(1, 1), mar = c(0, 0, 0, 0), oma = c(5, 7, 2, 2))
-plot(c(1, nSpecies), c(1, nFAZ), "n", xlab = "", xaxt = "n", ylab = "", yaxt = "n", xlim = c(0.5, nSpecies + 0.5))
-axis(side = 2, at = rev(1:nFAZ), fazNames, las = 1)
-for(i in 1:nFAZ){
-		if(is_even(i)) polygon(x = c(0, 11, 11, 0), y = rep(c(i-0.5, i+0.5), each = 2), col = "#00000010", border = NA)
-	}
-abline(v = seq(1.5, 4.5, 1), col = grey(0.8))
-for(s in 1:nSpecies){
-	ind <- which(!is.na(riskCatFull[s, ]))
-	points(rep(s, length(ind)), c(nFAZ:1)[ind], pch = c(24, 24, 25, 25)[riskCatFull[s, ind]], bg = mapCol[riskCatFull[s, ind]], col = mapCol[c(1,1,4,4)][riskCatFull[s, ind]], cex = findInterval(abs(riskSummaryFull[ind, s, 1]), zz)/2.5, lwd = 0.5) #
-}
-
-axis(side = 1, at = c(1:nSpecies), labels = speciesNames, las = 2)
-mtext(side = 2, outer = TRUE, "Freshwater Adaptive Zone (FAZ)", line = 5)
-###############################################################################
-# Observed vs predicted "trends"
-###############################################################################
-
-#-----------------------
-# For each region, look at RISK
-# -> pressure + vulnerability
-
-# For example sockeye
-# For each FAZ, calculate mean and range in risk from each pressure
-
-# For each region
-n <- 1000
-
-trend.predicted <- array(NA, dim = c(JAGSdat$nPop, 3), dimnames = list(NULL, c("mean", "li", "ui")))
-for(i in 1:JAGSdat$nPop){
-	
-	# boop <- numeric(n)
-	# for(j in 1:n){
-	# 	slopeBeta <- numeric(10)
-	# 	for(h in 1:JAGSdat$nHab){
-	# 		slopeBeta[h] <-	out[indMod[j, 1], indMod[j, 2], outInd$beta1[JAGSdat$spawnEco[i], h]] + out[indMod[j, 1], indMod[j, 2], outInd$phi[h]] * JAGSdat$streamOrder[i] + out[indMod[j, 1], indMod[j, 2], outInd$thetaFAZ[JAGSdat$faz[i], h]]
-	# 	}
-	# 	boop[j] <- out[indMod[j, 1], indMod[j, 2], outInd$beta0]	+ out[indMod[j, 1], indMod[j, 2], outInd$thetaMAZ[JAGSdat$maz[i], JAGSdat$rearEco[i]]] + sum(slopeBeta * habPressures[i, ])
-	# }
-	
-	# just mean prediction
-	for(h in 1:JAGSdat$nHab){
-		slopeBeta[h] <-	S[[1]][outInd$beta1[JAGSdat$spawnEco[i], h], 1] + S[[1]][outInd$phi[h], 1] * JAGSdat$streamOrder[i] + S[[1]][outInd$thetaFAZ[JAGSdat$faz[i], h],1]
-	}
-	
-	trend.predicted[i, 1] <- S[[1]][outInd$beta0, 1]	+ S[[1]][outInd$thetaMAZ[JAGSdat$maz[i], JAGSdat$rearEco[i]], 1] + sum(slopeBeta * habPressures[i, ])
-	
-	trend.predicted[i, 2] <- S[[1]][outInd$beta0, 1]	+ S[[1]][outInd$thetaMAZ[JAGSdat$maz[i], JAGSdat$rearEco[i]], 1]
-		
-}
-
-plot(popDat$trend3, trend.predicted[, 1], col = "#00000030", bty = "l", xlab = "Observed", ylab = "Predicted", las = 1)
-abline(h = 0)
-abline(v = 0)
-abline(a = 0, b = 1, lty = 2)
-
-predFit <- lm(popDat$trend3 ~ trend.predicted[, 1])
-summary(predFit)
-abline(predFit, col = 2, lwd = 2)
-
-R2 <- round(cor(popDat$trend3, trend.predicted[, 1])^2, 4)
-print(paste0("R2 = ", R2))
-print(paste0("adjusted R2 = ", round(1 - (JAGSdat$nPop - 1)/(JAGSdat$nPop - 62 - 1) * (1 - R2), 4)))
-adjusted R-squared is equal to 1 minus (n - 1)/(n – k - 1) times 1-minus-R-squared
-
-par(mfrow = c(1,3), mar = c(4,4,2,1))
-
-r <- 1 # Central Coast = 1
-s <- 5 # Species Sockeye = 5
-
-hist(popDat$trend3[which(popDat$region == regionNames[r] & popDat$SPECIES == speciesNames[s])], main = "Observed trend", xlab = "", breaks = seq(-0.155, 0.20, 0.01))
-abline(v= 0, lwd =2, col = 2)
-
-hist(trend.predicted[which(popDat$region == regionNames[r] & popDat$SPECIES == speciesNames[s]), 1], main = "Predicted trend", xlab = "", breaks = seq(-0.155, 0.20, 0.01))
-abline(v= 0, lwd =2, col = 2)
-
-hist(apply(risk[r, s, , ], 2, sum), main = "Risk from habitat pressures", breaks = seq(-0.155, 0.20, 0.01), xlab = "")
-abline(v= 0, lwd =2, col = 2)
-
-
-# How well does the plain intercept model do?
-plot(popDat$trend3, trend.predicted[, 2], col = "#00000030", bty = "l", xlab = "Observed", ylab = "Predicted", las = 1, ylim = c(-0.1, 0.02), xlim = c(-0.5, 0.8))
-abline(h = 0)
-abline(v = 0)
-abline(a = 0, b = 1, lty = 2)
-
-predFit2 <- lm(popDat$trend3 ~ trend.predicted[, 2])
-summary(predFit2)
-abline(predFit2, col = 2, lwd = 2)
-
-###############
-# Non FOrest rd density in LILL
-
-hist(popDat$NonForestRoadsDEN_km_km2[popDat$FAZ == "LILL"], breaks= seq(0, 5, 0.5), las = 1, freq = FALSE, col = fCol[which(fazNames == "LILL")], ylim = c(0, 1), main = habNames2[6])
-lines(density(popDat$NonForestRoadsDEN_km_km2[popDat$FAZ == "LILL"]), lwd = 2)
-lines(density(popDat$NonForestRoadsDEN_km_km2), lwd = 2, col = grey(0.8))
