@@ -5,7 +5,8 @@
 
 .DS_Store
 
-data/
+data/ignore
+
 figures/
 code/ignoreCode/
 output/
