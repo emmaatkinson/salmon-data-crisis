@@ -20,7 +20,6 @@ source("functions.R")
 #------------------------------------------------------------------------------
 
 # (0) Original NuSEDS dataset, without any CU information
-# nuseds <- read.csv("data/NuSEDS_20210513.csv") # Original analysis done with Sept 2020 data, and things changed slightly with new data so stick to original
 nuseds <- read.csv("data/NuSEDS_20200923.csv")
 
 # Clean up Estimate Classification field of nuseds
@@ -419,7 +418,6 @@ popForestDD <- unique(nusedsCU$POP_ID[popInd][which(wsd$WTRSHD_FID[match(nusedsC
 ###############################################################################
 # Calculate smoothed spawner abundance
 ###############################################################################
-# nusedsCU <- read.csv("data/Conservation_Unit_Data_filtered.csv")
 
 nPop <- popCount()
 spid <- unique(nusedsCU$SQ_POP_ID)
@@ -677,4 +675,4 @@ unique(popDat$rearEco)
 #------------------------------------------------------------------------------
 popDat <- cbind(popDat, hab[match(wsd$WTRSHD_FID[match(nusedsCU$POP_ID[popInd], wsd$POP_ID)], hab$WTRSHD_FID), c('AgriculturePCT', 'UrbanPCT', 'RIPDSTPCT', 'Linear_Dev_noRoads', 'ForestRoadsDEN_km_km2', 'NonForestRoadsDEN_km_km2', 'STRMXDEN', 'FORDST_PCT', 'ECAPCT', 'MPB_pct', 'WATER_LIC', 'WWD_count')])
 
-write.csv(popDat, file = "data/popDat.csv")
+write.csv(popDat, file = "data/compiled/popDat.csv")
