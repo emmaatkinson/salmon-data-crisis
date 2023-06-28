@@ -12,17 +12,19 @@
 #
 ##############################################################################
 ##############################################################################
+rm(list=ls())
+
 library(here)
 setwd(here())
 
-source("code/functions.R")
+source("code_EA/functions.R")
 
 #------------------------------------------------------------------------------
 # Read in NuSEDS data
 #------------------------------------------------------------------------------
 
 # (0) Original NuSEDS dataset, without any CU information
-nuseds <- read.csv("data_EA/NuSEDS_2023-June.csv")
+nuseds <- read.csv("data_EA/ignore/NuSEDS_2023-June.csv")
 
 # Clean up Estimate Classification field of nuseds
 nuseds$ESTIMATE_CLASSIFICATION[nuseds$ESTIMATE_CLASSIFICATION == "PRESENCE/ABSENCE (TYPE-6)"] <- "PRESENCE-ABSENCE (TYPE-6)"
@@ -49,7 +51,7 @@ nuseds$ESTIMATE_CLASSIFICATION <- factor(
 # and watershed, etc. (as well as CU!), and the pink salmon are split into
 # even and odd year populations, so its preferable.
 
-nusedsCU <- read.csv("data_EA/Conservation_Unit_Data_20220902_2023-June.csv")
+nusedsCU <- read.csv("data_EA/ignore/Conservation_Unit_Data_20220902_2023-June.csv")
 
 # Create unique id for each "SPECIES QUALIFIED" population
 # I.e., different for even and odd year pinks
@@ -104,7 +106,7 @@ popFiltered <- recordStep(popFiltered, newDescr = "Truncate to 1950")
 # Fraser sockeye: population specific based on input from Keri Benner
 # Southern BC Chinook: population specific input from Brown et al. (2020)
 
-sy <- read.csv("data/startYears.csv")
+sy <- read.csv("data_EA/startYears.csv")
 sy <- sy[!is.na(sy$FirstYear),]
 
 # # Plot for supplement
@@ -135,7 +137,7 @@ popCount() #6881
 popFiltered <- recordStep(popFiltered, newDescr = "Truncate sockeye, Chinook based on additional info")
 
 # Import cu to determine GFE_TYPE
-cu <- read.csv("data_EA/conservation_unit_system_sites_2023-June.csv")
+cu <- read.csv("data_EA/ignore/conservation_unit_system_sites_2023-June.csv")
 
 #------------------------------------------------------------------------------
 # (4) Disaggregation
