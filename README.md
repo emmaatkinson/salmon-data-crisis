@@ -1,20 +1,13 @@
 README
 ================
-Stephanie Peacock
-06/09/2022
+Emma Atkinson
+27-Jun-2023
 
-# Testing for broad-scale relationships between freshwater habitat pressure indicators and Pacific salmon population trends
+# Investigating the state of monitoring data for wild Pacific salmon populations in BC
 
 This repository contains code and data associated with an analysis to
-quantify the relationships between population status of Pacific salmon
-and habitat indicators. The project is a collaboration between DFO and
-the Pacific Salmon Foundation, building on the PSF’s recently updated
-[Pacific Salmon Explorer](www.salmonexplorer.ca) and associated
-datasets.
-
-This work has been published in the journal *Ecological Indicators* and
-is available open-access from
-<https://www.sciencedirect.com/science/article/pii/S1470160X23000778>.
+assess the current state of escapement monitoring for wild Pacific salmon
+populations in British Columbia
 
 ## Contents of this repo
 
@@ -42,10 +35,6 @@ guarantee that the format of the above data will be compatible with the
 code in this repo. Email us at the address below if you’d like the exact
 files used in our analysis.
 
-The habitat pressure data are also publicly available from the [Salmon
-Data Library](https://data.salmonwatersheds.ca/data-library/), as
-“spatial datasets” separated by pressure indicator and region.
-
 ### Code
 
 #### Files for compiling and checking data
@@ -61,38 +50,3 @@ Data Library](https://data.salmonwatersheds.ca/data-library/), as
 - `functions.R`: contains several basic functions used repeatedly in
   data compilation.
 
-#### Files for fitting Bayesian linear model in JAGS and visualizing results
-
-- `fitting.R`: Code for fitting the model above to the
-  population/habitat data compiled by `dataCompilationNuSEDS_CU.R` using
-  JAGS and rjags. Note that this code involves parallel computation.
-
-- `loadPopData.R`: Called by `fitting.R` and `lookingAtOutput.R` to
-  import the population/habitat data and create additional variables for
-  factor levels, etc.
-
-- `loadResults.R`: Called by `lookingAtOutput.R` to load MCMC output of
-  model fitting and organize parameter output in arrays.
-
-- `lookingAtOutput.R`: Code for plotting the results of the model object
-  from `fitting.R` and producing figures in the report.
-
-- `threatened.R`: Code that takes the model object from `fitting.R` and
-  samples from the posterior and data to calculate the proportion of
-  populations of different salmon species and Freshwater Adaptive Zones
-  (FAZs) throughout BC that would be classified as threatened with
-  increasing pressure values.
-
-### Simulations
-
-This repo contains code that runs a simple population simulation to
-explore how changing harvest and productivity through time may affect
-the observed trend in spawner abundance. This simulation was not
-described in the paper.
-
-## More information
-
-Visit the [Salmon Watersheds Program project
-page](https://salmonwatersheds.ca/projects/assessing-the-vulnerability-of-pacific-salmon-to-freshwater-habitat-pressures/)
-and check out the [Pacific Salmon Explorer](www.salmonexplorer.ca).
-Questions can be directed at Steph Peacock (speacock at psf dot ca).

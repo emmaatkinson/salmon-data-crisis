@@ -5,15 +5,13 @@
 
 .DS_Store
 
-data/ignore
+data_EA/ignore
 
-figures/
 code/ignoreCode/
 output/
 
 README.Rmd
 
 *.rds
-*.pdf
 *.png
 

@@ -1,0 +1,345 @@
+cuid,use,cuname,gen_length,sr_code,trtc_cu,FULL_CU_IN,cuindex,culabel,CU,spp,species,watershed,X
+308,ABUND,CK008-Middle Fraser-Fraser Canyon_SP_1.3,5,NA,CK-008,CK-8,8,CK008-Middle Fraser-Fraser Canyon_SP_1.3,CK008-Middle Fraser-Fraser Canyon_SP_1.3,CK,CK,NA,NA
+303,ABUND,CK003-Lower Fraser River_FA_0.3,4,NA,CK-003,CK-3,3,CK003-Lower Fraser River_FA_0.3,CK003-Lower Fraser River_FA_0.3,CK,CK,NA,NA
+307,ABUND,CK007-Maria Slough_SU_0.3,4,NA,CK-007,CK-7,7,CK007-Maria Slough_SU_0.3,CK007-Maria Slough_SU_0.3,CK,CK,NA,NA
+304,ABUND,CK004-Lower Fraser River_SP_1.3,5,NA,CK-004,CK-4,4,CK004-Lower Fraser River_SP_1.3,CK004-Lower Fraser River_SP_1.3,CK,CK,NA,NA
+306,ABUND,CK006-Lower Fraser River_SU_1.3,5,NA,CK-006,CK-6,6,CK006-Lower Fraser River_SU_1.3,CK006-Lower Fraser River_SU_1.3,CK,CK,NA,NA
+305,ABUND,CK005-Lower Fraser River-Upper Pitt_SU_1.3,5,NA,CK-005,CK-5,5,CK005-Lower Fraser River-Upper Pitt_SU_1.3,CK005-Lower Fraser River-Upper Pitt_SU_1.3,CK,CK,NA,NA
+317,ABUND,CK017-Lower Thompson_SP_1.2,4,NA,CK-017,CK-17,17,CK017-Lower Thompson_SP_1.2,CK017-Lower Thompson_SP_1.2,CK,CK,NA,NA
+309,ABUND,CK009-Middle Fraser River-Portage_FA_1.3,5,NA,CK-009,CK-9,9,CK009-Middle Fraser River-Portage_FA_1.3,CK009-Middle Fraser River-Portage_FA_1.3,CK,CK,NA,NA
+310,ABUND,CK010-Middle Fraser River_SP_1.3,5,NA,CK-010,CK-10,10,CK010-Middle Fraser River_SP_1.3,CK010-Middle Fraser River_SP_1.3,CK,CK,NA,NA
+311,ABUND,CK011-Middle Fraser River_SU_1.3,5,NA,CK-011,CK-11,11,CK011-Middle Fraser River_SU_1.3,CK011-Middle Fraser River_SU_1.3,CK,CK,NA,NA
+318,ABUND,CK018-North Thompson_SP_1.3,5,NA,CK-018,CK-18,18,CK018-North Thompson_SP_1.3,CK018-North Thompson_SP_1.3,CK,CK,NA,NA
+319,ABUND,CK019-North Thompson_SU_1.3,5,NA,CK-019,CK-19,19,CK019-North Thompson_SU_1.3,CK019-North Thompson_SU_1.3,CK,CK,NA,NA
+315,ABUND,CK015-Shuswap River_SU_0.3,4,NA,CK-015,CK-15,15,CK015-Shuswap River_SU_0.3,CK015-Shuswap River_SU_0.3,CK,CK,NA,NA
+316,ABUND,CK016-South Thompson-Bessette Creek_SU_1.2,4,NA,CK-016,CK-16,16,CK016-South Thompson-Bessette Creek_SU_1.2,CK016-South Thompson-Bessette Creek_SU_1.2,CK,CK,NA,NA
+313,ABUND,CK013-South Thompson_SU_0.3,4,NA,CK-013,CK-13,13,CK013-South Thompson_SU_0.3,CK013-South Thompson_SU_0.3,CK,CK,NA,NA
+314,ABUND,CK014-South Thompson_SU_1.3,5,NA,CK-014,CK-14,14,CK014-South Thompson_SU_1.3,CK014-South Thompson_SU_1.3,CK,CK,NA,NA
+333,ABUND,CK082-Upper Adams River_SU_x.x,5,NA,CK-082,CK-82,82,CK082-Upper Adams River_SU_x.x,CK082-Upper Adams River_SU_x.x,CK,CK,NA,NA
+312,ABUND,CK012-Upper Fraser River_SP_1.3,5,NA,CK-012,CK-12,12,CK012-Upper Fraser River_SP_1.3,CK012-Upper Fraser River_SP_1.3,CK,CK,NA,NA
+701,FALSE,Lower Fraser,4,NA,CM-002,CM-2,2,Lower Fraser,Lower Fraser,CM,CM,NA,NA
+705,FALSE,Fraser Canyon,4,NA,CO-005,CO-5,5,Fraser Canyon,Fraser Canyon,CO,CO,NA,NA
+749,FALSE,Interior Fraser,4,NA,CO-048,CO-48,48,Interior Fraser,Interior Fraser,CO,CO,NA,NA
+704,FALSE,Lillooet,4,NA,CO-004,CO-4,4,Lillooet,Lillooet,CO,CO,NA,NA
+750,FALSE,Lower Fraser,4,NA,CO-047,CO-47,47,Lower Fraser,Lower Fraser,CO,CO,NA,NA
+707,FALSE,Lower Thompson,4,NA,CO-007,CO-7,7,Lower Thompson,Lower Thompson,CO,CO,NA,NA
+709,FALSE,North Thompson,4,NA,CO-009,CO-9,9,North Thompson,North Thompson,CO,CO,NA,NA
+708,FALSE,South Thompson,4,NA,CO-008,CO-8,8,South Thompson,South Thompson,CO,CO,NA,NA
+710,TRUE,Fraser River,2,1,PKO-001,PKO-1,1,Fraser River,Fraser River,PKO,PKO,NA,NA
+751,FALSE,Adams and Momich Lakes_Early Summer,4,NA,SEL-09-912,SEL-09-xx,L-09-xx,Adams and Momich Lakes_Early Summer,Adams and Momich Lakes_Early Summer,SEL,SEL,NA,NA
+719,TRUE,Anderson/Seton_Early Summer,4,1,SEL-06-001,SEL-06-01,L-06-01,Anderson/Seton_Early Summer,Anderson/Seton_Early Summer,SEL,SEL,NA,NA
+735,TRUE,Bowron_Early Summer,4,2,SEL-07-001,SEL-07-01,L-07-01,Bowron_Early Summer,Bowron_Early Summer,SEL,SEL,NA,NA
+720,FALSE,Chilko_Early Summer,4,NA,SEL-06-002,SEL-06-02,L-06-02,Chilko_Early Summer,Chilko_Early Summer,SEL,SEL,NA,NA
+721,TRUE,Chilko_Summer,4,3,SEL-06-003,SEL-06-03,L-06-03,Chilko_Summer,Chilko_Summer,SEL,SEL,NA,NA
+711,FALSE,Chilliwack_Early Summer,4,NA,SEL-03-001,SEL-03-01,L-03-01,Chilliwack_Early Summer,Chilliwack_Early Summer,SEL,SEL,NA,NA
+712,ABUND,Cultus_Late,4,NA,SEL-03-002,SEL-03-02,L-03-02,Cultus_Late,Cultus_Late,SEL,SEL,NA,NA
+725,TRUE,Francois/Fraser_Summer,4,4,SEL-06-007,SEL-06-07,L-06-07,Francois/Fraser_Summer,Francois/Fraser_Summer,SEL,SEL,NA,NA
+713,ABUND,Harrison-downstream migrating_Late,4,NA,SEL-03-003,SEL-03-03,L-03-03,Harrison-downstream migrating_Late,Harrison-downstream migrating_Late,SEL,SEL,NA,NA
+714,TRUE,Harrison-upstream migrating_Late,4,5,SEL-03-004,SEL-03-04,L-03-04,Harrison-upstream migrating_Late,Harrison-upstream migrating_Late,SEL,SEL,NA,NA
+740,TRUE,Kamloops_Early Summer,4,7,SEL-10-001,SEL-10-01,L-10-01,Kamloops_Early Summer,Kamloops_Early Summer,SEL,SEL,NA,NA
+716,TRUE,Lillooet/Harrison_Late,4,8,SEL-04-001,SEL-04-01,L-04-01,Lillooet/Harrison_Late,Lillooet/Harrison_Late,SEL,SEL,NA,NA
+727,TRUE,Nadina/Francois_Early Summer,4,9,SEL-06-020,SEL-06-20,L-06-20,Nadina/Francois_Early Summer,Nadina/Francois_Early Summer,SEL,SEL,NA,NA
+718,ABUND,Nahatlatch_Early Summer,4,NA,SEL-05-002,SEL-05-02,L-05-02,Nahatlatch_Early Summer,Nahatlatch_Early Summer,SEL,SEL,NA,NA
+752,TRUE,North Barriere_Early Summer,4,10,SEL-10-003,SEL-10-03,L-10-03,North Barriere_Early Summer,North Barriere_Early Summer,SEL,SEL,NA,NA
+715,TRUE,Pitt_Early Summer,4,11,SEL-03-005,SEL-03-05,L-03-05,Pitt_Early Summer,Pitt_Early Summer,SEL,SEL,NA,NA
+728,ABUND,Quesnel_Summer,4,NA,SEL-06-010,SEL-06-10,L-06-10,Quesnel_Summer,Quesnel_Summer,SEL,SEL,NA,NA
+729,TRUE,Seton_Late,4,13,SEL-06-011,SEL-06-11,L-06-11,Seton_Late,Seton_Late,SEL,SEL,NA,NA
+738,ABUND,Shuswap_Early Summer,4,NA,SEL-09-002,SEL-09-02,L-09-02,Shuswap_Early Summer,Shuswap_Early Summer,SEL,SEL,NA,NA
+739,ABUND,Shuswap_Late,4,NA,SEL-09-003,SEL-09-03,L-09-03,Shuswap_Late,Shuswap_Late,SEL,SEL,NA,NA
+732,ABUND,Takla/Trembleur_Early Stuart,4,NA,SEL-06-014,SEL-06-14,L-06-14,Takla/Trembleur_Early Stuart,Takla/Trembleur_Early Stuart,SEL,SEL,NA,NA
+731,ABUND,Takla/Trembleur/Stuart_Summer,4,NA,SEL-06-013,SEL-06-13,L-06-13,Takla/Trembleur/Stuart_Summer,Takla/Trembleur/Stuart_Summer,SEL,SEL,NA,NA
+734,ABUND,Taseko_Early Summer,4,NA,SEL-06-016,SEL-06-16,L-06-16,Taseko_Early Summer,Taseko_Early Summer,SEL,SEL,NA,NA
+745,ABUND,Harrison River,4,6,SER-003,SER-03,R03,Harrison River,Harrison River,SER,SER,NA,NA
+742,ABUND,Widgeon,4,NA,SER-002,SER-02,R02,Widgeon,Widgeon,SER,SER,NA,NA
+302,FALSE,CK002-Boundary Bay_FA_0.3,5,NA,CK-002,CK-2,2,CK002-Boundary Bay_FA_0.3,CK002-Boundary Bay_FA_0.3,CK,CK,NA,NA
+906,FALSE,Boundary Bay,4,NA,CO-001,CO-1,1,Boundary Bay,Boundary Bay,CO,CO,NA,NA
+322,ABUND,CK022-East Vancouver Island-Cowichan and Koksilah_FA_0.x,3,NA,CK-022,CK-22,22,CK022-East Vancouver Island-Cowichan and Koksilah_FA_0.x,CK022-East Vancouver Island-Cowichan and Koksilah_FA_0.x,CK,CK,NA,NA
+321,ABUND,CK021-East Vancouver Island-Goldstream_FA_0.x,3,NA,CK-021,CK-21,21,CK021-East Vancouver Island-Goldstream_FA_0.x,CK021-East Vancouver Island-Goldstream_FA_0.x,CK,CK,NA,NA
+324,ABUND,CK025-East Vancouver Island-Nanaimo and Chemainus_FA_0.x,3,NA,CK-025,CK-25,25,CK025-East Vancouver Island-Nanaimo and Chemainus_FA_0.x,CK025-East Vancouver Island-Nanaimo and Chemainus_FA_0.x,CK,CK,NA,NA
+325,ABUND,CK027-East Vancouver Island-Qualicum and Puntledge_FA_0.x,4,NA,CK-027,CK-27,27,CK027-East Vancouver Island-Qualicum and Puntledge_FA_0.x,CK027-East Vancouver Island-Qualicum and Puntledge_FA_0.x,CK,CK,NA,NA
+323,FALSE,CK023-East Vancouver Island-Nanaimo_SP_1.x,4,NA,CK-023,CK-23,23,CK023-East Vancouver Island-Nanaimo_SP_1.x,CK023-East Vancouver Island-Nanaimo_SP_1.x,CK,CK,NA,NA
+334,ABUND,CK083-East Vancouver Island-Georgia Strait_SU_0.3,4,NA,CK-083,CK-83,83,CK083-East Vancouver Island-Georgia Strait_SU_0.3,CK083-East Vancouver Island-Georgia Strait_SU_0.3,CK,CK,NA,NA
+331,FALSE,CK034-Homathko_SU_x.x,5,NA,CK-034,CK-34,34,CK034-Homathko_SU_x.x,CK034-Homathko_SU_x.x,CK,CK,NA,NA
+332,FALSE,CK035-Klinaklini_SU_1.3,5,NA,CK-035,CK-35,35,CK035-Klinaklini_SU_1.3,CK035-Klinaklini_SU_1.3,CK,CK,NA,NA
+327,ABUND,CK029-East Vancouver Island-North_FA_0.x,4,NA,CK-029,CK-29,29,CK029-East Vancouver Island-North_FA_0.x,CK029-East Vancouver Island-North_FA_0.x,CK,CK,NA,NA
+330,ABUND,CK033-West Vancouver Island-North_FA_0.x,4,NA,CK-033,CK-33,33,CK033-West Vancouver Island-North_FA_0.x,CK033-West Vancouver Island-North_FA_0.x,CK,CK,NA,NA
+320,FALSE,CK020-Southern Mainland-Georgia Strait_FA_0.x,4,NA,CK-020,CK-20,20,CK020-Southern Mainland-Georgia Strait_FA_0.x,CK020-Southern Mainland-Georgia Strait_FA_0.x,CK,CK,NA,NA
+326,ABUND,CK028-Southern Mainland-Southern Fjords_FA_0.x,4,NA,CK-028,CK-28,28,CK028-Southern Mainland-Southern Fjords_FA_0.x,CK028-Southern Mainland-Southern Fjords_FA_0.x,CK,CK,NA,NA
+328,ABUND,CK031-West Vancouver Island-South_FA_0.x,4,NA,CK-031,CK-31,31,CK031-West Vancouver Island-South_FA_0.x,CK031-West Vancouver Island-South_FA_0.x,CK,CK,NA,NA
+329,ABUND,CK032-West Vancouver Island-Nootka and Kyuquot_FA_0.x,4,NA,CK-032,CK-32,32,CK032-West Vancouver Island-Nootka and Kyuquot_FA_0.x,CK032-West Vancouver Island-Nootka and Kyuquot_FA_0.x,CK,CK,NA,NA
+901,FALSE,Bute Inlet,4,NA,CM-007,CM-7,7,Bute Inlet,Bute Inlet,CM,CM,NA,NA
+904,ABUND,Georgia Strait,4,NA,CM-004,CM-4,4,Georgia Strait,Georgia Strait,CM,CM,NA,NA
+905,ABUND,Howe Sound-Burrand Inlet,4,NA,CM-003,CM-3,3,Howe Sound-Burrand Inlet,Howe Sound-Burrand Inlet,CM,CM,NA,NA
+902,ABUND,Loughborough,4,NA,CM-006,CM-6,6,Loughborough,Loughborough,CM,CM,NA,NA
+903,ABUND,Northeast Vancouver Island,4,NA,CM-005,CM-5,5,Northeast Vancouver Island,Northeast Vancouver Island,CM,CM,NA,NA
+977,TRUE,Northwest Vancouver Island,4,1,CM-011,CM-11,11,Northwest Vancouver Island,Northwest Vancouver Island,CM,CM,NA,NA
+900,ABUND,Southern Coastal Streams,4,NA,CM-008,CM-8,8,Southern Coastal Streams,Southern Coastal Streams,CM,CM,NA,NA
+978,TRUE,Southwest & West  Vancouver Island,4,2,CM-010,CM-10,10,Southwest & West  Vancouver Island,Southwest & West  Vancouver Island,CM,CM,NA,NA
+979,FALSE,Upper Knight,4,NA,CM-009,CM-9,9,Upper Knight,Upper Knight,CM,CM,NA,NA
+915,FALSE,Clayoquot,4,NA,CO-018,CO-18,18,Clayoquot,Clayoquot,CO,CO,NA,NA
+910,FALSE,East Vancouver Island-Georgia Strait,4,NA,CO-013,CO-13,13,East Vancouver Island-Georgia Strait,East Vancouver Island-Georgia Strait,CO,CO,NA,NA
+911,FALSE,East Vancouver Island-Johnstone Strait-Southern Fjords,4,NA,CO-014,CO-14,14,East Vancouver Island-Johnstone Strait-Southern Fjords,East Vancouver Island-Johnstone Strait-Southern Fjords,CO,CO,NA,NA
+908,FALSE,Georgia Strait Mainland,4,NA,CO-011,CO-11,11,Georgia Strait Mainland,Georgia Strait Mainland,CO,CO,NA,NA
+916,FALSE,Homathko-Klinaklini Rivers,4,NA,CO-019,CO-19,19,Homathko-Klinaklini Rivers,Homathko-Klinaklini Rivers,CO,CO,NA,NA
+907,FALSE,Howe Sound-Burrard Inlet,4,NA,CO-010,CO-10,10,Howe Sound-Burrard Inlet,Howe Sound-Burrard Inlet,CO,CO,NA,NA
+913,FALSE,Juan de Fuca-Pachena,4,NA,CO-016,CO-16,16,Juan de Fuca-Pachena,Juan de Fuca-Pachena,CO,CO,NA,NA
+912,FALSE,Nahwitti Lowland,4,NA,CO-015,CO-15,15,Nahwitti Lowland,Nahwitti Lowland,CO,CO,NA,NA
+909,FALSE,Southern Coastal Streams-Queen Charlotte Strait-Johnstone Strait-Southern Fjords,4,NA,CO-012,CO-12,12,Southern Coastal Streams-Queen Charlotte Strait-Johnstone Strait-Southern Fjords,Southern Coastal Streams-Queen Charlotte Strait-Johnstone Strait-Southern Fjords,CO,CO,NA,NA
+914,FALSE,West Vancouver Island,4,NA,CO-017,CO-17,17,West Vancouver Island,West Vancouver Island,CO,CO,NA,NA
+917,TRUE,Georgia Strait,2,1,PKE-001,PKE-1,1,Georgia Strait,Georgia Strait,PKE,PKE,NA,NA
+919,FALSE,Northwest Vancouver Island,2,NA,PKE-003,PKE-3,3,Northwest Vancouver Island,Northwest Vancouver Island,PKE,PKE,NA,NA
+920,TRUE,Southern Fjords,2,2,PKE-004,PKE-4,4,Southern Fjords,Southern Fjords,PKE,PKE,NA,NA
+918,FALSE,West Vancouver Island,2,NA,PKE-002,PKE-2,2,West Vancouver Island,West Vancouver Island,PKE,PKE,NA,NA
+921,TRUE,East Howe Sound-Burrard Inlet,2,3,PKO-002,PKO-2,2,East Howe Sound-Burrard Inlet,East Howe Sound-Burrard Inlet,PKO,PKO,NA,NA
+923,TRUE,East Vancouver Island-Johnstone Strait,2,5,PKO-004,PKO-4,4,East Vancouver Island-Johnstone Strait,East Vancouver Island-Johnstone Strait,PKO,PKO,NA,NA
+922,TRUE,Georgia Strait,2,4,PKO-003,PKO-3,3,Georgia Strait,Georgia Strait,PKO,PKO,NA,NA
+924,TRUE,Nahwitti,2,6,PKO-005,PKO-5,5,Nahwitti,Nahwitti,PKO,PKO,NA,NA
+926,TRUE,Southern Fjords,2,7,PKO-007,PKO-7,7,Southern Fjords,Southern Fjords,PKO,PKO,NA,NA
+925,FALSE,West Vancouver Island,2,NA,PKO-006,PKO-6,6,West Vancouver Island,West Vancouver Island,PKO,PKO,NA,NA
+945,FALSE,Alice,5,NA,SEL-13-001,SEL-13-01,L-13-01,Alice,Alice,SEL,SEL,NA,NA
+946,FALSE,Canoe Creek,5,NA,SEL-13-002,SEL-13-02,L-13-02,Canoe Creek,Canoe Creek,SEL,SEL,NA,NA
+947,FALSE,Cecilia,5,NA,SEL-13-003,SEL-13-03,L-13-03,Cecilia,Cecilia,SEL,SEL,NA,NA
+948,FALSE,Cheewat,5,NA,SEL-13-004,SEL-13-04,L-13-04,Cheewat,Cheewat,SEL,SEL,NA,NA
+949,FALSE,Clayoquot,5,NA,SEL-13-005,SEL-13-05,L-13-05,Clayoquot,Clayoquot,SEL,SEL,NA,NA
+950,FALSE,Deserted,5,NA,SEL-13-006,SEL-13-06,L-13-06,Deserted,Deserted,SEL,SEL,NA,NA
+951,ABUND,Fairy,5,NA,SEL-13-007,SEL-13-07,L-13-07,Fairy,Fairy,SEL,SEL,NA,NA
+927,FALSE,Fulmore,5,NA,SEL-11-001,SEL-11-01,L-11-01,Fulmore,Fulmore,SEL,SEL,NA,NA
+952,TRUE,Great Central,5,1,SEL-13-008,SEL-13-08,L-13-08,Great Central,Great Central,SEL,SEL,NA,NA
+953,ABUND,Henderson,5,NA,SEL-13-009,SEL-13-09,L-13-09,Henderson,Henderson,SEL,SEL,NA,NA
+954,FALSE,Hesquiat,5,NA,SEL-13-010,SEL-13-10,L-13-10,Hesquiat,Hesquiat,SEL,SEL,NA,NA
+928,FALSE,Heydon,5,NA,SEL-11-002,SEL-11-02,L-11-02,Heydon,Heydon,SEL,SEL,NA,NA
+955,ABUND,Hobiton,5,NA,SEL-13-011,SEL-13-11,L-13-11,Hobiton,Hobiton,SEL,SEL,NA,NA
+937,ABUND,Ida/Bonanza,5,NA,SEL-12-001,SEL-12-01,L-12-01,Ida/Bonanza,Ida/Bonanza,SEL,SEL,NA,NA
+956,FALSE,Jansen,5,NA,SEL-13-012,SEL-13-12,L-13-12,Jansen,Jansen,SEL,SEL,NA,NA
+929,FALSE,Kakweiken,5,NA,SEL-11-003,SEL-11-03,L-11-03,Kakweiken,Kakweiken,SEL,SEL,NA,NA
+957,FALSE,Kanim,5,NA,SEL-13-013,SEL-13-13,L-13-13,Kanim,Kanim,SEL,SEL,NA,NA
+958,ABUND,Kennedy,5,NA,SEL-13-014,SEL-13-14,L-13-14,Kennedy,Kennedy,SEL,SEL,NA,NA
+930,FALSE,Loose,5,NA,SEL-11-004,SEL-11-04,L-11-04,Loose,Loose,SEL,SEL,NA,NA
+931,ABUND,Mackenzie,5,NA,SEL-11-005,SEL-11-05,L-11-05,Mackenzie,Mackenzie,SEL,SEL,NA,NA
+959,FALSE,Maggie,5,NA,SEL-13-015,SEL-13-15,L-13-15,Maggie,Maggie,SEL,SEL,NA,NA
+960,FALSE,Megin,5,NA,SEL-13-016,SEL-13-16,L-13-16,Megin,Megin,SEL,SEL,NA,NA
+961,ABUND,Muchalat,5,NA,SEL-13-017,SEL-13-17,L-13-17,Muchalat,Muchalat,SEL,SEL,NA,NA
+962,FALSE,Muriel,5,NA,SEL-13-018,SEL-13-18,L-13-18,Muriel,Muriel,SEL,SEL,NA,NA
+938,FALSE,Nahwitti,5,NA,SEL-12-002,SEL-12-02,L-12-02,Nahwitti,Nahwitti,SEL,SEL,NA,NA
+939,TRUE,Nimpkish,5,NA,SEL-12-003,SEL-12-03,L-12-03,Nimpkish,Nimpkish,SEL,SEL,NA,NA
+963,ABUND,Nitinat,5,NA,SEL-13-019,SEL-13-19,L-13-19,Nitinat,Nitinat,SEL,SEL,NA,NA
+964,FALSE,O'Connell,5,NA,SEL-13-020,SEL-13-20,L-13-20,O'Connell,O'Connell,SEL,SEL,NA,NA
+966,ABUND,Park River,5,NA,SEL-13-022,SEL-13-22,L-13-22,Park River,Park River,SEL,SEL,NA,NA
+932,ABUND,Phillips,5,NA,SEL-11-006,SEL-11-06,L-11-06,Phillips,Phillips,SEL,SEL,NA,NA
+967,ABUND,Power,5,NA,SEL-13-023,SEL-13-23,L-13-23,Power,Power,SEL,SEL,NA,NA
+941,FALSE,Quatse,4,NA,SEL-12-005,SEL-12-05,L-12-05,Quatse,Quatse,SEL,SEL,NA,NA
+933,ABUND,Sakinaw,5,NA,SEL-11-007,SEL-11-07,L-11-07,Sakinaw,Sakinaw,SEL,SEL,NA,NA
+942,FALSE,Schoen,5,NA,SEL-12-006,SEL-12-06,L-12-06,Schoen,Schoen,SEL,SEL,NA,NA
+943,FALSE,Shushartie,5,NA,SEL-12-007,SEL-12-07,L-12-07,Shushartie,Shushartie,SEL,SEL,NA,NA
+969,TRUE,Sproat,5,2,SEL-13-025,SEL-13-25,L-13-25,Sproat,Sproat,SEL,SEL,NA,NA
+935,FALSE,Tzoonie,5,NA,SEL-11-009,SEL-11-09,L-11-09,Tzoonie,Tzoonie,SEL,SEL,NA,NA
+976,FALSE,Vernon,5,NA,SEL-12-009,SEL-12-09,L-12-09,Vernon,Vernon,SEL,SEL,NA,NA
+936,FALSE,Village Bay,5,NA,SEL-11-010,SEL-11-10,L-11-10,Village Bay,Village Bay,SEL,SEL,NA,NA
+970,FALSE,William/Brink,5,NA,SEL-13-026,SEL-13-26,L-13-26,William/Brink,William/Brink,SEL,SEL,NA,NA
+944,FALSE,Woss,5,NA,SEL-12-008,SEL-12-08,L-12-08,Woss,Woss,SEL,SEL,NA,NA
+973,FALSE,East Vancouver Island and Georgia Strait,5,NA,SER-008,SER-08,R08,East Vancouver Island and Georgia Strait,East Vancouver Island and Georgia Strait,SER,SER,NA,NA
+974,FALSE,NW Vancouver Island,5,NA,SER-011,SER-011,R11,NW Vancouver Island,NW Vancouver Island,SER,SER,NA,NA
+971,FALSE,Southern Fjords,5,NA,SER-009,SER-009,R09,Southern Fjords,Southern Fjords,SER,SER,NA,NA
+972,FALSE,West Vancouver Island,5,NA,SER-010,SER-010,R10,West Vancouver Island,West Vancouver Island,SER,SER,NA,NA
+500,TRUE,Smith Inlet,4,1,CM_12,CM-12,12,Smith Inlet,Smith Inlet,Chum,Chum,,
+501,TRUE,Rivers Inlet,4,2,CM_13,CM-13,13,Rivers Inlet,Rivers Inlet,Chum,Chum,,
+502,FALSE,Wannock,4,NA,CM_14,CM-14,14,Wannock,Wannock,Chum,Chum,,
+503,TRUE,Spiller-Fitz-Hugh-Burke,4,3,CM_15,CM-15,15,Spiller-Fitz-Hugh-Burke,Spiller-Fitz-Hugh-Burke,Chum,Chum,,
+504,TRUE,Bella Colla-Dean Rivers,4,4,CM_16,CM-16,16,Bella Colla-Dean Rivers,Bella Colla-Dean Rivers,Chum,Chum,,
+505,FALSE,Bella Coola River-Late,4,NA,CM_17,CM-17,17,Bella Coola River-Late,Bella Coola River-Late,Chum,Chum,,
+506,TRUE,Hecate Lowlands,4,5,CM_18,CM-18,18,Hecate Lowlands,Hecate Lowlands,Chum,Chum,,
+507,TRUE,Mussel-Kynock,4,6,CM_19,CM-19,19,Mussel-Kynock,Mussel-Kynock,Chum,Chum,,
+508,TRUE,Douglas-Gardner,4,7,CM_20,CM-20,20,Douglas-Gardner,Douglas-Gardner,Chum,Chum,,
+509,FALSE,Docee,4,10,CN_36,CK-36,36,Docee,Docee,Chinook,Chinook,,
+510,TRUE,Rivers Inlet,5,1,CN_37,CK-37,37,Rivers Inlet,Rivers Inlet,Chinook,Chinook,,
+511,TRUE,Wannock,5,2,CN_38,CK-38,38,Wannock,Wannock,Chinook,Chinook,,
+512,TRUE,Bella Coola-Bentinck,5,3,CN_39,CK-39,39,Bella Coola-Bentinck,Bella Coola-Bentinck,Chinook,Chinook,,
+513,TRUE,Dean River,5,4,CN_40,CK-40,40,Dean River,Dean River,Chinook,Chinook,,
+514,TRUE,NCC-late timing,5,5,CN_41,CK-41,41,NCC-late timing,NCC-late timing,Chinook,Chinook,,
+515,TRUE,NCC-early timing,5,6,CN_42,CK-42,42,NCC-early timing,NCC-early timing,Chinook,Chinook,,
+516,TRUE,Smith Inlet,4,1,CO_20,CO-20,20,Smith Inlet,Smith Inlet,Coho,Coho,,
+517,FALSE,Rivers Inlet,4,2,CO_21,CO-21,21,Rivers Inlet,Rivers Inlet,Coho,Coho,,
+518,TRUE,Bella Coola-Dean Rivers,4,3,CO_22,CO-22,22,Bella Coola-Dean Rivers,Bella Coola-Dean Rivers,Coho,Coho,,
+519,TRUE,Mussel-Kynoch,4,4,CO_26,CO-26,26,Mussel-Kynoch,Mussel-Kynoch,Coho,Coho,,
+520,TRUE,Hecate Strait Mainland,4,5,CO_27,CO-27,27,Hecate Strait Mainland,Hecate Strait Mainland,Coho,Coho,,
+521,TRUE,Brim-Wahoo,4,6,CO_28,CO-28,28,Brim-Wahoo,Brim-Wahoo,Coho,Coho,,
+522,TRUE,Douglas Channel-Kitimat Arm,4,7,CO_29,CO-29,29,Douglas Channel-Kitimat Arm,Douglas Channel-Kitimat Arm,Coho,Coho,,
+523,TRUE,N Coastal Streams,4,8,CO_30,CO-30,30,N Coastal Streams,N Coastal Streams,Coho,Coho,,
+524,TRUE,Long,5,1,SX_L-15-01,SEL-15-01,L-15-01,Long,Long,Sockeye-Lake,Lake Sockeye,,
+525,TRUE,Owikeno,5,2,SX_L-15-02,SEL-15-02,L-15-02,Owikeno,Owikeno,Sockeye-Lake,Lake Sockeye,,
+526,FALSE,Owikeno-Late,5,NA,SX_L-15-03,SEL-15-03,L-15-03,Owikeno-Late,Owikeno-Late,Sockeye-Lake,Lake Sockeye,,
+527,FALSE,Wannock[Owikeno],5,NA,L-15-04,SEL-15-04,L-15-04,Wannock[Owikeno],Wannock[Owikeno],Sockeye-Lake,Lake Sockeye,,
+528,TRUE,South Atnarko Lakes,5,28,SX_528,SX_528,SX_528,South Atnarko Lakes,South Atnarko Lakes,Sockeye-Lake,Lake Sockeye,,
+529,TRUE,Backland,5,3,SX_L-18-01,SEL-18-01,L-18-01,Backland,Backland,Sockeye-Lake,Lake Sockeye,,
+530,FALSE,Soda Creek,5,NA,SX_L-18-10,SEL-18-10,L-18-10,Soda Creek,Soda Creek,Sockeye-Lake,Lake Sockeye,,
+531,FALSE,Whalen,5,NA,SX_L-18-11,SEL-18-11,L-18-11,Whalen,Whalen,Sockeye-Lake,Lake Sockeye,,
+532,TRUE,Canoona,5,4,SX_L-18-02,SEL-18-02,L-18-02,Canoona,Canoona,Sockeye-Lake,Lake Sockeye,,
+533,FALSE,Dome ,5,NA,SX_L-18-03,SEL-18-03,L-18-03,Dome ,Dome ,Sockeye-Lake,Lake Sockeye,,
+534,TRUE,Evelyn,5,5,SX_L-18-04,SEL-18-04,L-18-04,Evelyn,Evelyn,Sockeye-Lake,Lake Sockeye,,
+535,TRUE,Kainet Creek,5,6,SX_L-18-05,SEL-18-05,L-18-05,Kainet Creek,Kainet Creek,Sockeye-Lake,Lake Sockeye,,
+536,FALSE,Kimsquit,5,NA,SX_L-18-06,SEL-18-06,L-18-06,Kimsquit,Kimsquit,Sockeye-Lake,Lake Sockeye,,
+537,FALSE,Kitkiata,5,NA,SX_L-18-07,SEL-18-07,L-18-07,Kitkiata,Kitkiata,Sockeye-Lake,Lake Sockeye,,
+538,TRUE,Kitlope,5,7,SX_L-18-08,SEL-18-08,L-18-08,Kitlope,Kitlope,Sockeye-Lake,Lake Sockeye,,
+539,FALSE,Pine River,5,NA,SX_L-18-09,SEL-18-09,L-18-09,Pine River,Pine River,Sockeye-Lake,Lake Sockeye,,
+540,FALSE,Banks,5,NA,SX_L-19-01,SEL-19-01,L-19-01,Banks,Banks,Sockeye-Lake,Lake Sockeye,,
+541,TRUE,Bloomfield,5,8,SX_L-19-02,SEL-19-02,L-19-02,Bloomfield,Bloomfield,Sockeye-Lake,Lake Sockeye,,
+542,FALSE,Bolton Creek,5,NA,SX_L-19-03,SEL-19-03,L-19-03,Bolton Creek,Bolton Creek,Sockeye-Lake,Lake Sockeye,,
+543,FALSE,Bonilla,5,NA,SX_L-19-04,SEL-19-04,L-19-04,Bonilla,Bonilla,Sockeye-Lake,Lake Sockeye,,
+544,FALSE,Borrowman Creek,5,NA,SX_L-19-05,SEL-19-05,L-19-05,Borrowman Creek,Borrowman Creek,Sockeye-Lake,Lake Sockeye,,
+545,FALSE,Busey Creek,5,NA,SX_L-19-06,SEL-19-06,L-19-06,Busey Creek,Busey Creek,Sockeye-Lake,Lake Sockeye,,
+546,FALSE,Cartwright Creek,5,NA,SX_L-19-07,SEL-19-07,L-19-07,Cartwright Creek,Cartwright Creek,Sockeye-Lake,Lake Sockeye,,
+547,FALSE,Chic Chic ,5,NA,SX_L-19-08,SEL-19-08,L-19-08,Chic Chic ,Chic Chic ,Sockeye-Lake,Lake Sockeye,,
+548,FALSE,Citeyats,5,NA,SX_L-19-09,SEL-19-09,L-19-09,Citeyats,Citeyats,Sockeye-Lake,Lake Sockeye,,
+549,FALSE,Fannie Cove,5,NA,SX_L-19-10,SEL-19-10,L-19-10,Fannie Cove,Fannie Cove,Sockeye-Lake,Lake Sockeye,,
+550,TRUE,Curtis Inlet,5,9,SX_L-19-11,SEL-19-11,L-19-11,Curtis Inlet,Curtis Inlet,Sockeye-Lake,Lake Sockeye,,
+551,FALSE,Dallain Creek,5,NA,SX_L-19-12,SEL-19-12,L-19-12,Dallain Creek,Dallain Creek,Sockeye-Lake,Lake Sockeye,,
+552,FALSE,Deer,5,NA,SX_L-19-13,SEL-19-13,L-19-13,Deer,Deer,Sockeye-Lake,Lake Sockeye,,
+553,TRUE,Devon,5,10,SX_L-19-14,SEL-19-14,L-19-14,Devon,Devon,Sockeye-Lake,Lake Sockeye,,
+554,FALSE,Douglas Creek,5,NA,SX_L-19-15,SEL-19-15,L-19-15,Douglas Creek,Douglas Creek,Sockeye-Lake,Lake Sockeye,,
+555,FALSE,Elizabeth,5,NA,SX_L-19-16,SEL-19-16,L-19-16,Elizabeth,Elizabeth,Sockeye-Lake,Lake Sockeye,,
+556,FALSE,Elsie/Hoy,5,NA,SX_L-19-17,SEL-19-17,L-19-17,Elsie/Hoy,Elsie/Hoy,Sockeye-Lake,Lake Sockeye,,
+557,FALSE,End Hill Creek,5,NA,SX_L-19-18,SEL-19-18,L-19-18,End Hill Creek,End Hill Creek,Sockeye-Lake,Lake Sockeye,,
+558,FALSE,Evinrude Inlet,5,NA,SX_L-19-19,SEL-19-19,L-19-19,Evinrude Inlet,Evinrude Inlet,Sockeye-Lake,Lake Sockeye,,
+559,FALSE,Freeda,5,11,SX_L-19-20,SEL-19-20,L-19-20,Freeda,Freeda,Sockeye-Lake,Lake Sockeye,,
+560,TRUE,Hartley Bay,5,12,SX_L-19-21,SEL-19-21,L-19-21,Hartley Bay,Hartley Bay,Sockeye-Lake,Lake Sockeye,,
+561,FALSE,Hevenor Inlet,5,NA,SX_L-19-22,SEL-19-22,L-19-22,Hevenor Inlet,Hevenor Inlet,Sockeye-Lake,Lake Sockeye,,
+562,FALSE,Higgins Lagoon,5,NA,SX_L-19-23,SEL-19-23,L-19-23,Higgins Lagoon,Higgins Lagoon,Sockeye-Lake,Lake Sockeye,,
+563,TRUE,Kadjusdis River,5,13,SX_L-19-24,SEL-19-24,L-19-24,Kadjusdis River,Kadjusdis River,Sockeye-Lake,Lake Sockeye,,
+564,FALSE,Kdelmashan Creek,5,NA,SX_L-19-25,SEL-19-25,L-19-25,Kdelmashan Creek,Kdelmashan Creek,Sockeye-Lake,Lake Sockeye,,
+565,TRUE,Keecha,5,14,SX_L-19-26,SEL-19-26,L-19-26,Keecha,Keecha,Sockeye-Lake,Lake Sockeye,,
+566,FALSE,Kent Inlet Lagoon Creek,5,NA,SX_L-19-27,SEL-19-27,L-19-27,Kent Inlet Lagoon Creek,Kent Inlet Lagoon Creek,Sockeye-Lake,Lake Sockeye,,
+567,FALSE,Kenzuwash Creeks,5,NA,SX_L-19-28,SEL-19-28,L-19-28,Kenzuwash Creeks,Kenzuwash Creeks,Sockeye-Lake,Lake Sockeye,,
+568,FALSE,Keswar Creek,5,NA,SX_L-19-29,SEL-19-29,L-19-29,Keswar Creek,Keswar Creek,Sockeye-Lake,Lake Sockeye,,
+569,FALSE,Kildidt Creek,5,NA,SX_L-19-30,SEL-19-30,L-19-30,Kildidt Creek,Kildidt Creek,Sockeye-Lake,Lake Sockeye,,
+570,FALSE,Kildidt Lagoon Creek,5,NA,SX_L-19-31,SEL-19-31,L-19-31,Kildidt Lagoon Creek,Kildidt Lagoon Creek,Sockeye-Lake,Lake Sockeye,,
+571,FALSE,Kisameet,5,NA,SX_L-19-32,SEL-19-32,L-19-32,Kisameet,Kisameet,Sockeye-Lake,Lake Sockeye,,
+572,TRUE,Koeye,5,15,SX_L-19-33,SEL-19-33,L-19-33,Koeye,Koeye,Sockeye-Lake,Lake Sockeye,,
+573,TRUE,Kooryet,5,16,SX_L-19-34,SEL-19-34,L-19-34,Kooryet,Kooryet,Sockeye-Lake,Lake Sockeye,,
+574,FALSE,Kunsoot River,5,NA,SX_L-19-35,SEL-19-35,L-19-35,Kunsoot River,Kunsoot River,Sockeye-Lake,Lake Sockeye,,
+575,FALSE,Kwakwa Creek,5,17,SX_L-19-36,SEL-19-36,L-19-36,Kwakwa Creek,Kwakwa Creek,Sockeye-Lake,Lake Sockeye,,
+576,FALSE,Lewis Creek,5,NA,SX_L-19-37,SEL-19-37,L-19-37,Lewis Creek,Lewis Creek,Sockeye-Lake,Lake Sockeye,,
+577,FALSE,Limestone Creek,5,NA,SX_L-19-38,SEL-19-38,L-19-38,Limestone Creek,Limestone Creek,Sockeye-Lake,Lake Sockeye,,
+578,TRUE,Lowe/Simpson/Weir,5,18,SX_L-19-39,SEL-19-39,L-19-39,Lowe/Simpson/Weir,Lowe/Simpson/Weir,Sockeye-Lake,Lake Sockeye,,
+579,TRUE,Mary Cove Creek,5,19,SX_L-19-40,SEL-19-40,L-19-40,Mary Cove Creek,Mary Cove Creek,Sockeye-Lake,Lake Sockeye,,
+580,FALSE,Mcdonald Creek,5,NA,SX_L-19-41,SEL-19-41,L-19-41,Mcdonald Creek,Mcdonald Creek,Sockeye-Lake,Lake Sockeye,,
+581,FALSE,Mcloughlin,5,NA,SX_L-19-42,SEL-19-42,L-19-42,Mcloughlin,Mcloughlin,Sockeye-Lake,Lake Sockeye,,
+582,TRUE,Mikado,5,27,SX_L-19-43,SEL-19-43,L-19-43,Mikado,Mikado,Sockeye-Lake,Lake Sockeye,,
+583,FALSE,Monckton Inlet Creek,5,NA,SX_L-19-44,SEL-19-44,L-19-44,Monckton Inlet Creek,Monckton Inlet Creek,Sockeye-Lake,Lake Sockeye,,
+584,TRUE,Namu,5,20,SX_L-19-45,SEL-19-45,L-19-45,Namu,Namu,Sockeye-Lake,Lake Sockeye,,
+585,TRUE,Port John,5,21,SX_L-19-46,SEL-19-46,L-19-46,Port John,Port John,Sockeye-Lake,Lake Sockeye,,
+586,FALSE,Powles Creek,5,NA,SX_L-19-47,SEL-19-47,L-19-47,Powles Creek,Powles Creek,Sockeye-Lake,Lake Sockeye,,
+587,FALSE,Price Creek,5,NA,SX_L-19-48,SEL-19-48,L-19-48,Price Creek,Price Creek,Sockeye-Lake,Lake Sockeye,,
+588,TRUE,Roderick,5,22,SX_L-19-50,SEL-19-50,L-19-50,Roderick,Roderick,Sockeye-Lake,Lake Sockeye,,
+589,FALSE,Ryan Creek,5,NA,SX_L-19-51,SEL-19-51,L-19-51,Ryan Creek,Ryan Creek,Sockeye-Lake,Lake Sockeye,,
+590,FALSE,Salter,5,NA,SX_L-19-52,SEL-19-52,L-19-52,Salter,Salter,Sockeye-Lake,Lake Sockeye,,
+591,FALSE,Scoular/Kilpatrick,5,NA,SX_L-19-53,SEL-19-53,L-19-53,Scoular/Kilpatrick,Scoular/Kilpatrick,Sockeye-Lake,Lake Sockeye,,
+592,FALSE,Sheneeza Inlet,5,NA,SX_L-19-55,SEL-19-55,L-19-55,Sheneeza Inlet,Sheneeza Inlet,Sockeye-Lake,Lake Sockeye,,
+593,FALSE,Ship Point Creek,5,NA,SX_L-19-56,SEL-19-56,L-19-56,Ship Point Creek,Ship Point Creek,Sockeye-Lake,Lake Sockeye,,
+594,FALSE,Spencer Creek,5,NA,SX_L-19-57,SEL-19-57,L-19-57,Spencer Creek,Spencer Creek,Sockeye-Lake,Lake Sockeye,,
+595,FALSE,Stannard Creek,5,NA,SX_L-19-58,SEL-19-58,L-19-58,Stannard Creek,Stannard Creek,Sockeye-Lake,Lake Sockeye,,
+596,FALSE,Talamoosa Creek,5,NA,SX_L-19-59,SEL-19-59,L-19-59,Talamoosa Creek,Talamoosa Creek,Sockeye-Lake,Lake Sockeye,,
+597,TRUE,Tankeeah River,5,23,SX_L-19-60,SEL-19-60,L-19-60,Tankeeah River,Tankeeah River,Sockeye-Lake,Lake Sockeye,,
+598,FALSE,Treneman Creek,5,NA,SX_L-19-61,SEL-19-61,L-19-61,Treneman Creek,Treneman Creek,Sockeye-Lake,Lake Sockeye,,
+599,TRUE,Tsimtack/Moore/Roger,5,24,SX_L-19-62,SEL-19-62,L-19-62,Tsimtack/Moore/Roger,Tsimtack/Moore/Roger,Sockeye-Lake,Lake Sockeye,,
+600,FALSE,Tuno Creek East,5,NA,SX_L-19-63,SEL-19-63,L-19-63,Tuno Creek East,Tuno Creek East,Sockeye-Lake,Lake Sockeye,,
+601,FALSE,Tuno Creek West,5,NA,SX_L-19-64,SEL-19-64,L-19-64,Tuno Creek West,Tuno Creek West,Sockeye-Lake,Lake Sockeye,,
+602,FALSE,Tyler Creek,5,NA,SX_L-19-65,SEL-19-65,L-19-65,Tyler Creek,Tyler Creek,Sockeye-Lake,Lake Sockeye,,
+603,FALSE,Wale Creek,5,NA,SX_L-19-66,SEL-19-66,L-19-66,Wale Creek,Wale Creek,Sockeye-Lake,Lake Sockeye,,
+604,FALSE,Watt Bay,5,NA,SX_L-19-67,SEL-19-67,L-19-67,Watt Bay,Watt Bay,Sockeye-Lake,Lake Sockeye,,
+605,FALSE,West Creek,5,NA,SX_L-19-68,SEL-19-68,L-19-68,West Creek,West Creek,Sockeye-Lake,Lake Sockeye,,
+606,FALSE,Yaaklele Lagoon,5,NA,SX_L-19-69,SEL-19-69,L-19-69,Yaaklele Lagoon,Yaaklele Lagoon,Sockeye-Lake,Lake Sockeye,,
+607,TRUE,Yeo,5,25,SX_L-19-70,SEL-19-70,L-19-70,Yeo,Yeo,Sockeye-Lake,Lake Sockeye,,
+608,TRUE,Hecate Lowlands,2,1,PKe_5,PKE-05,5,Hecate Lowlands,Hecate Lowlands,Pink,Pink (Even),,
+609,TRUE,Hecate Strait-Fjords,2,2,PKe_6,PKE-06,6,Hecate Strait-Fjords,Hecate Strait-Fjords,Pink,Pink (Even),,
+610,TRUE,Homathko-Klinaklini-Rivers-Smith-Bella Coola Dean,2,3,PKo_8,PKO-08,8,Homathko-Klinaklini-Rivers-Smith-Bella Coola Dean,Homathko-Klinaklini-Rivers-Smith-Bella Coola Dean,Pink,Pink (Odd),,
+611,TRUE,Hecate Strait-Lowlands,2,4,PKo_12,PKO-12,12,Hecate Strait-Lowlands,Hecate Strait-Lowlands,Pink,Pink (Odd),,
+612,TRUE,Hecate Strait-Fjords,2,5,PKo_13,PKO-13,13,Hecate Strait-Fjords,Hecate Strait-Fjords,Pink,Pink (Odd),,
+613,FALSE,Rivers-Smith Inlets,4,NA,SX_R12,SER-12,R12,Rivers-Smith Inlets,Rivers-Smith Inlets,Sockeye-River,River Sockeye,,
+614,FALSE,Northern Coastal Fjords,4,26,SX_R16,SER-16,R16,Northern Coastal Fjords,Northern Coastal Fjords,Sockeye-Lake,Lake Sockeye,,
+615,FALSE,Northern Coastal,4,NA,SX_R17,SER-17,R17,Northern Coastal,Northern Coastal,Sockeye-River,River Sockeye,,
+401,TRUE,Portland Sound-Observatory Inlet-Lower Nass,5,1,CN_57,CK-57,57,Portland Sound-Observatory Inlet-Lower Nass,Portland Sound-Observatory Inlet-Lower Nass,Chinook,Chinook,Nass,
+402,TRUE,Upper Nass,5,2,CN_58,CK-58,58,Upper Nass-CK,Upper Nass-CK,Chinook,Chinook,Nass,
+405,FALSE,Lower Nass,4,NA,CM_31,CM-31,31,Lower Nass-CM,Lower Nass-CM,Chum,Chum,Nass,
+406,TRUE,Portland Canal-Observatory,4,1,CM_32,CM-32,32,Portland Canal-Observatory,Portland Canal-Observatory,Chum,Chum,Nass,
+404,TRUE,Portland Inlet,4,2,CM_30,CM-30,30,Portland Inlet,Portland Inlet,Chum,Chum,Nass,
+408,TRUE,Lower Nass,4,1,CO_35,CO-35,35,Lower Nass-CO,Lower Nass-CO,Coho,Coho,Nass,
+410,TRUE,Portland Sound-Observatory Inlet-Portland Canal,4,2,CO_37,CO-37,37,Portland Sound-Observatory Inlet-Portland Canal,Portland Sound-Observatory Inlet-Portland Canal,Coho,Coho,Nass,
+409,TRUE,Upper Nass,4,3,CO_36,CO-36,36,Upper Nass-CO,Upper Nass-CO,Coho,Coho,Nass,
+414,TRUE,Nass-Portland-Observatory,2,2,PKo_17,PKO-17,17,Nass-Portland-Observatory,Nass-Portland-Observatory,Pink,Pink (Odd),Nass,
+412,FALSE,Upper Nass,,NA,NA,NA,,Upper Nass-PKE,,Pink,Pink (Even),Nass,
+415,FALSE,Upper Nass,,NA,NA,NA,,Upper Nass-PKO,,Pink,Pink (Odd),Nass,
+420,FALSE,Bowser,,NA,NA,NA,,Bowser,,Sockeye-Lake,Lake Sockeye,Nass,
+418,FALSE,Clements,,NA,NA,NA,,Clements,,Sockeye-Lake,Lake Sockeye,Nass,
+421,TRUE,Damdochax,5,1,SX_L-24-02,SEL-24-02,L-24-02,Damdochax,Damdochax,Sockeye-Lake,Lake Sockeye,Nass,
+422,TRUE,Fred Wright,5,2,SX_L-24-03,SEL-24-03,L-24-03,Fred Wright,Fred Wright,Sockeye-Lake,Lake Sockeye,Nass,
+423,FALSE,Kwinageese,,NA,NA,NA,,Kwinageese,,Sockeye-Lake,Lake Sockeye,Nass,
+419,FALSE,Leverson,,NA,NA,NA,,Leverson,,Sockeye-Lake,Lake Sockeye,Nass,
+424,TRUE,Meziadin,5,3,SX_L-24-05,SEL-24-05,L-24-05,Meziadin,Meziadin,Sockeye-Lake,Lake Sockeye,Nass,
+425,FALSE,Oweegee,,NA,NA,NA,,Oweegee,,Sockeye-Lake,Lake Sockeye,Nass,
+416,FALSE,Prudhomme,5,NA,SX_L-19-49,SEL-19-49,L-19-49,Prudhomme,Prudhomme,Sockeye-Lake,Lake Sockeye,Nass,
+417,FALSE,Shawatlan,5,NA,SX_L-19-54,SEL-19-54,L-19-54,Shawatlan,Shawatlan,Sockeye-Lake,Lake Sockeye,Nass,
+426,TRUE,Lower Nass-Portland,4,NA,SX_R20,SER-20,R20,Lower Nass-Portland,Lower Nass-Portland,Sockeye-River,River Sockeye,Nass,
+427,FALSE,Upper Nass River,4,NA,SX_R21,SER-21,R21,Upper Nass River,Upper Nass River,Sockeye-River,River Sockeye,Nass,
+205,FALSE,Ecstall,6,1,CN_46,CK-46,,Ecstall,Ecstall,Chinook,Chinook,Skeena,
+210,TRUE,Lower Skeena-CK,6,4,CN_48,CK-48,,Lower Skeena,Lower Skeena-CK,Chinook,Chinook,Skeena,
+206,FALSE,Kalum-early timing,6,2,CN_49,CK-49,,Kalum-Early,Kalum-early timing,Chinook,Chinook,Skeena,
+207,TRUE,Kalum-late timing,6,3,CN_50,CK-50,,Kalum-Late,Kalum-late timing,Chinook,Chinook,Skeena,
+222,TRUE,Middle Skeena-large lakes,6,5,CN_53,CK-53,,Middle Skeena-Large Lakes,Middle Skeena-large lakes,Chinook,Chinook,Skeena,
+217,TRUE,Middle Skeena-mainstem tributaries,6,6,CN_54,CK-54,,Middle Skeena-Mainstem Tributaries,Middle Skeena-mainstem tributaries,Chinook,Chinook,Skeena,
+221,FALSE,Upper Bulkley River,6,7,CN_55,CK-55,,Upper Bulkley River,Upper Bulkley River,Chinook,Chinook,Skeena,
+224,FALSE,Skeena Estuary-CK,6,NA,NA,CK-45,,Skeena Estuary,Skeena Estuary-CK,Chinook,Chinook,Skeena,
+212,FALSE,Upper Skeena-CK,6,NA,NA,CK-56,,Upper Skeena,Upper Skeena-CK,Chinook,Chinook,Skeena,
+227,FALSE,Lakelse-CK,6,NA,NA,CK-51,,Lakelse,Lakelse-CK,Chinook,Chinook,Skeena,
+229,FALSE,Zymoetz,6,NA,NA,CK-80,,Zymoetz,Zymoetz,Chinook,Chinook,Skeena,
+241,FALSE,Sicintine,6,NA,NA,CK-81,,Sicintine,Sicintine-CK,Chinook,Chinook,Skeena,
+211,TRUE,Lower Skeena-CM,4,2,CM_27,CM-27,,Lower Skeena,Lower Skeena-CM,Chum,Chum,Skeena,
+214,FALSE,Middle Skeena-CM,NA,NA,CM_28,CM-28,,Middle Skeena,Middle Skeena-CM,Chum,Chum,Skeena,
+220,FALSE,Skeena Estuary-CM,NA,NA,CM_26,CM-26,,Skeena Estuary,Skeena Estuary-CM,Chum,Chum,Skeena,
+242,FALSE,Upper Skeena,6,NA,NA,NA,,Upper Skeena,Upper Skeena-CM,Chum,Chum,Skeena,
+202,TRUE,Lower Skeena-CO,4,1,CO_32,CO-32,,Lower Skeena,Lower Skeena-CO,Coho,Coho,Skeena,
+215,TRUE,Middle Skeena-CO,4,2,CO_33,CO-33,,Middle Skeena,Middle Skeena-CO,Coho,Coho,Skeena,
+231,TRUE,Upper Skeena-CO,4,3,CO_34,CO-34,,Upper Skeena,Upper Skeena-CO,Coho,Coho,Skeena,
+225,FALSE,Skeena Estuary-CO,4,NA,CO_31,CO-31,,Skeena Estuary,Skeena Estuary-CO,Coho,Coho,Skeena,
+240,FALSE,Lower Skeena (even),2,NA,NA,NA,,Lower Skeena (even),,Pink,Pink (Even),Skeena,
+213,TRUE,Middle & Upper Skeena (odd),2,5,PKo_16,PKO-16,,Middle-Upper Skeena (odd),Middle & Upper Skeena (odd),Pink,Pink (Odd),Skeena,
+219,TRUE,Nass-Skeena Estuary (even),2,1,PKe_7,PKE-07,,Nass-Skeena Estuary (even),Nass-Skeena Estuary (even),Pink,Pink (Even),Skeena,
+218,TRUE,Middle-Upper Skeena (even),2,2,PKe_8,PKE-08,,Middle-Upper Skeena (even),Middle-Upper Skeena (even),Pink,Pink (Even),Skeena,
+223,TRUE,Nass-Skeena Estuary (odd),2,3,PKo_14,PKO-14,,Nass-Skeena Estuary (odd),Nass-Skeena Estuary (odd),Pink,Pink (Odd),Skeena,
+209,TRUE,Lower Skeena (odd),2,4,PKo_15,PKO-15,,Lower Skeena River (odd),Lower Skeena (odd),Pink,Pink (Odd),Skeena,
+172,FALSE,Aldrich,5,NA,NA,NA,L_20_02,Mcdonell/Dennis/Aldrich,,Sockeye-Lake,Lake Sockeye,Skeena,
+173,FALSE,Dennis,5,NA,NA,NA,L_20_03,Mcdonell/Dennis/Aldrich,,Sockeye-Lake,Lake Sockeye,Skeena,
+179,FALSE,Atna,5,NA,NA,NA,L_21_01,Morice/Atna,,Sockeye-Lake,Lake Sockeye,Skeena,
+182,FALSE,Club Lake,5,NA,NA,NA,L_21_04,Swan/Club,,Sockeye-Lake,Lake Sockeye,Skeena,
+184,FALSE,Maxan,5,NA,NA,NA,L_21_06,Bulkley/Maxan,,Sockeye-Lake,Lake Sockeye,Skeena,
+204,FALSE,Babine-Pinkut,5,NA,NA,NA,,Babine (enhanced),,Sockeye-Lake,Lake Sockeye,Skeena,
+243,FALSE,Onerka,5,NA,NA,NA,,Babine/Onerka,,Sockeye-Lake,Lake Sockeye,Skeena,
+174,FALSE,Ecstall/Lower,5,NA,NA,SEL-20-04,L_20_04,Ecstall/Lower,Ecstall_Lower,Sockeye-Lake,Lake Sockeye,Skeena,
+181,FALSE,Bulkley,5,NA,NA,SEL-21-03,L_21_03,Bulkley/Maxan,Bulkley,Sockeye-Lake,Lake Sockeye,Skeena,
+194,FALSE,Johanson,5,NA,NA,SEL-22-05,L_22_05,Johanson,Johanson,Sockeye-Lake,Lake Sockeye,Skeena,
+195,FALSE,Kluatantan,5,NA,NA,SEL-22-06,L_22_06,Kluatantan,Kluatantan,Sockeye-Lake,Lake Sockeye,Skeena,
+196,FALSE,Kluayaz,5,NA,NA,SEL-22-07,L_22_07,Kluayaz,Kluayaz,Sockeye-Lake,Lake Sockeye,Skeena,
+198,FALSE,Sicintine,5,NA,NA,SEL-22-09,L_22_09,Sicintine,Sicintine,Sockeye-Lake,Lake Sockeye,Skeena,
+199,FALSE,Slamgeesh,5,NA,NA,SEL-22-10,L_22_10,Slamgeesh,Slamgeesh,Sockeye-Lake,Lake Sockeye,Skeena,
+200,FALSE,Spawning,5,NA,NA,SEL-22-11,L_22_11,Spawning,Spawning,Sockeye-Lake,Lake Sockeye,Skeena,
+201,FALSE,Sustut,5,NA,NA,SEL-22-12,L_22_12,Sustut,Sustut,Sockeye-Lake,Lake Sockeye,Skeena,
+230,FALSE,Footsore/Hodder,5,NA,NA,SEL-21-12,,Footsore/Hodder,Footsore_Hodder,Sockeye-Lake,Lake Sockeye,Skeena,
+171,TRUE,Alastair,6,1,SX_L-20-01,SEL-20-01,L_20_01,Alastair,Alastair,Sockeye-Lake,Lake Sockeye,Skeena,
+175,FALSE,Johnston,5,8,SX_L-20-05,SEL-20-05,L_20_05,Johnston,Johnston,Sockeye-Lake,Lake Sockeye,Skeena,
+176,TRUE,Kitsumkalum,5,9,SX_L-20-06,SEL-20-06,L_20_06,Kitsumkalum,Kitsumkalum,Sockeye-Lake,Lake Sockeye,Skeena,
+177,TRUE,Lakelse,5,11,SX_L-20-07,SEL-20-07,L_20_07,Lakelse,Lakelse-SL,Sockeye-Lake,Lake Sockeye,Skeena,
+178,TRUE,Mcdonell,5,12,SX_L-20-08,SEL-20-08,L_20_08,Mcdonell/Dennis/Aldrich,Mcdonell,Sockeye-Lake,Lake Sockeye,Skeena,
+180,TRUE,Babine,5,5,SX_L-21-02-EW,SEL-21-02-EW,L_21_02,Babine/Onerka,Babine-SL,Sockeye-Lake,Lake Sockeye,Skeena,
+203,TRUE,Babine (enhanced),5,4,SX_L-21-02-F,SEL-21-02-F,,Babine (enhanced),Babine (enhanced),Sockeye-Lake,Lake Sockeye,Skeena,
+186,TRUE,Nilkitkwa,5,18,SX_L-21-02-LW,SEL-21-02-LW,L_21_08,Nilkitkwa,Nilkitkwa,Sockeye-Lake,Lake Sockeye,Skeena,
+189,TRUE,Tahlo/Morrison,5,19,SX_L-21-02-MW,SEL-21-02-MW,L_21_11,Tahlo/Morrison,Tahlo_Morrison,Sockeye-Lake,Lake Sockeye,Skeena,
+183,TRUE,Gitanyow,5,10,SX_L-21-05,SEL-21-05,L_21_05,Gitanyow (Kitwanga/Kitwancool),Kitwancool,Sockeye-Lake,Lake Sockeye,Skeena,
+185,TRUE,Morice,6,13,SX_L-21-07,SEL-21-07,L_21_07,Morice/Atna,Morice,Sockeye-Lake,Lake Sockeye,Skeena,
+187,TRUE,Stephens,5,16,SX_L-21-09,SEL-21-09,L_21_09,Stephens,Stephens,Sockeye-Lake,Lake Sockeye,Skeena,
+188,TRUE,Swan,5,17,SX_L-21-10,SEL-21-10,L_21_10,Swan/Club,Swan,Sockeye-Lake,Lake Sockeye,Skeena,
+190,TRUE,Asitika,5,2,SX_L-22-01,SEL-22-01,L_22_01,Asitika,Asitika,Sockeye-Lake,Lake Sockeye,Skeena,
+191,TRUE,Azuklotz,5,3,SX_L-22-02,SEL-22-02,L_22_02,Azuklotz,Azuklotz,Sockeye-Lake,Lake Sockeye,Skeena,
+192,TRUE,Bear,5,6,SX_L-22-03,SEL-22-03,L_22_03,Bear,Bear,Sockeye-Lake,Lake Sockeye,Skeena,
+193,FALSE,Damshilgwit,5,7,SX_L-22-04,SEL-22-04,L_22_04,Damshilgwit,Damshilgwit,Sockeye-Lake,Lake Sockeye,Skeena,
+197,TRUE,Motase,5,14,SX_L-22-08,SEL-22-08,L_22_08,Motase,Motase,Sockeye-Lake,Lake Sockeye,Skeena,
+226,FALSE,Skeena River,5,NA,NA,SER-18,,Skeena River,Skeena River,Sockeye-River,River Sockeye,Skeena,
+216,FALSE,Skeena River-high interior,5,15,SX_R19,SER-19,,Skeena River-High Interior,Skeena River-high interior,Sockeye-River,River Sockeye,Skeena,
