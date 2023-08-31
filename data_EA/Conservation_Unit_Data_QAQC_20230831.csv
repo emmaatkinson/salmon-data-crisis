@@ -1,0 +1,6 @@
+"","Step","Descr","nRemoved","nPop"
+"1",0,"Raw NuSEDS CU",0,7152
+"2",1,"Remove MAX_ESTIMATE == NA",253,6899
+"3",2,"Truncate to 1950",11,6888
+"4",3,"Truncate sockeye, Chinook based on additional info",2,6886
+"5",4,"Removed duplicate records, dis/aggregated populations",0,6886

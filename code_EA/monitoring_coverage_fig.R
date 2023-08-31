@@ -17,21 +17,22 @@
 rm(list=ls())
 graphics.off()
 
+library(scales)
 library(here)
 setwd(here())
 
-source("code/functions.R")
+source("code_EA/functions.R")
 
 #------------------------------------------------------------------------------
 # Read in NuSEDS data
 #------------------------------------------------------------------------------
 
 ### Read in cleaned up data ###
-nuseds_raw <- read.csv("data_EA/NuSEDS_2023-June.csv")
-nuseds <- read.csv("data_EA/Conservation_Unit_Data_filtered_20230627.csv")
-popdat <- read.csv("data_EA/popDat_20230627.csv")
+#nuseds_raw <- read.csv("data_EA/NuSEDS_2023-June.csv")
+nuseds <- read.csv("data_EA/Conservation_Unit_Data_filtered_20230831.csv")
+popdat <- read.csv("data_EA/popDat_20230831.csv")
 
-popdat <- popdat[which(is.na(popdat$region)==FALSE),]
+popdat <- popdat[which(is.na(popdat$PSE_region)==FALSE),]
 
 # Reading in collated spawner-recruit data by species #
 nuseds$GEOGRAPHICAL_EXTNT_OF_ESTIMATE <- as.character(nuseds$GEOGRAPHICAL_EXTNT_OF_ESTIMATE)
@@ -90,12 +91,10 @@ for (species in unique(m$species)) {
 m$prop.counted = m$no.counted/m$total.systems
 
 # Write to file #
-# dir.table <- "C:/Users/Emma Atkinson/Desktop/Research/SoS/Tables"
-# setwd(dir.table)
-# write.csv(m, "monitoring_coverage_table_Feb-2019.csv")
+write.csv(m, "data_EA/monitoring_coverage_table_Aug-2023.csv")
 
 # Plotting #
-pdf("figures/River-level_monitoring_coverage_coastwide_Jun-2023.pdf", 6,6)
+pdf("figures/River-level_monitoring_coverage_coastwide_Aug-2023.pdf", 6,6)
 #tiff("monitoring_coverage_Sept-2019.tiff", width=4, height=4, units="in", pointsize=9, res=600)
 #windows(9,9)
 
@@ -114,11 +113,11 @@ lines(unique(m$year), m[m$species=="Chum",]$no.counted, col="grey20", lty=2, lwd
 lines(unique(m$year), m[m$species=="Coho",]$no.counted, col="black", lty=3, lwd=1)
 lines(unique(m$year), m[m$species=="Chinook",]$no.counted, col="grey40", lty=4, lwd=1)
 lines(unique(m$year), m[m$species=="Sockeye",]$no.counted, col="grey50", lty=5, lwd=1)
-lines(unique(m$year), m[m$species=="Pink",]$no.counted, col="black", lwd=2)
+lines(unique(m$year), m[m$species=="Pink",]$no.counted, col=alpha("black",0.75), lwd=2)
 lines(unique(m$year), m[m$species=="all",]$no.counted, lwd=4, col="#2E8B57")
 
-legend("topright", lty= c(1,1,2,3,4,5), lwd=c(4,2,1,1,1,1), col=c("#2E8B57", "black","grey20","black","grey40","grey50"), 
-			 c("All systems (n=80)", "Pink", "Chum","Coho","Chinook","Sockeye"), bty="n", cex=.7)
+legend("topright", lty= c(1,1,2,3,4,5), lwd=c(4,2,1,1,1,1), col=c("#2E8B57", alpha("black",0.75),"grey20","black","grey40","grey50"), 
+			 c("All systems", "Pink", "Chum","Coho","Chinook","Sockeye"), bty="n", cex=.7)
 
 
 # plot(unique(m$year), m[m$species=="all",]$no.counted, ylim=c(0,80), type="l", lwd=2, col="white", ylab="Number of systems counted",xlab="Year", xaxt="n", yaxt="n")
@@ -138,9 +137,9 @@ dev.off()
 ##################################################################################
 ### GENERATING REGIONALLY-SPECIFIC FIGURES 
 ##################################################################################
-for (reg in unique(popdat$region)){
+for (reg in unique(popdat$PSE_region)){
     
-		p = popdat[popdat$region==reg,]$POP_ID
+		p = popdat[popdat$PSE_region==reg,]$POP_ID
 	
 		# Set up dataframe for summary numbers #
 		data <- nuseds[nuseds$POP_ID %in% p,]
@@ -196,12 +195,10 @@ for (reg in unique(popdat$region)){
 		m$prop.counted = m$no.counted/m$total.systems
 		
 		# Write to file #
-		# dir.table <- "C:/Users/Emma Atkinson/Desktop/Research/SoS/Tables"
-		# setwd(dir.table)
-		# write.csv(m, "monitoring_coverage_table_Feb-2019.csv")
+		write.csv(m, "data_EA/regional_monitoring_coverage_table_Aug_2023.csv")
 		
 		# Plotting #
-		pdf(paste("figures/River-level_monitoring_coverage_Jun-2023_",reg,".pdf",sep=""), 6,6)
+		pdf(paste("figures/River-level_monitoring_coverage_Aug-2023_",reg,".pdf",sep=""), 6,6)
 		#tiff("monitoring_coverage_Sept-2019.tiff", width=4, height=4, units="in", pointsize=9, res=600)
 		#windows(9,9)
 		
@@ -220,11 +217,11 @@ for (reg in unique(popdat$region)){
 		lines(unique(m$year), m[m$species=="Coho",]$no.counted, col="black", lty=3, lwd=1)
 		lines(unique(m$year), m[m$species=="Chinook",]$no.counted, col="grey40", lty=4, lwd=1)
 		lines(unique(m$year), m[m$species=="Sockeye",]$no.counted, col="grey50", lty=5, lwd=1)
-		lines(unique(m$year), m[m$species=="Pink",]$no.counted, col="black", lwd=2)
+		lines(unique(m$year), m[m$species=="Pink",]$no.counted, col=alpha("black",0.75), lwd=2)
 		lines(unique(m$year), m[m$species=="all",]$no.counted, lwd=4, col="#2E8B57")
 		
-		legend("topright", lty= c(1,1,2,3,4,5), lwd=c(4,2,1,1,1,1), col=c("#2E8B57", "black","grey20","black","grey40","grey50"), 
-					 c("All systems (n=80)", "Pink", "Chum","Coho","Chinook","Sockeye"), bty="n", cex=.7)
+		legend("topright", lty= c(1,1,2,3,4,5), lwd=c(4,2,1,1,1,1), col=c("#2E8B57", alpha("black",0.75),"grey20","black","grey40","grey50"), 
+					 c("All systems", "Pink", "Chum","Coho","Chinook","Sockeye"), bty="n", cex=.7)
 		
 		# plot(unique(m$year), m[m$species=="all",]$no.counted, ylim=c(0,80), type="l", lwd=2, col="white", ylab="Number of systems counted",xlab="Year", xaxt="n", yaxt="n")
 		# axis(1, at=seq(1950,2020,5), lab=seq(1950,2020,5))
@@ -245,9 +242,9 @@ for (reg in unique(popdat$region)){
 ##################################################################################
 ### GENERATING REGIONALLY-SPECIFIC FIGURES AT A CU-LEVEL
 ##################################################################################
-for (reg in unique(popdat$region)){
+for (reg in unique(popdat$PSE_region)){
 	
-		p = popdat[popdat$region==reg,]$POP_ID
+		p = popdat[popdat$PSE_region==reg,]$POP_ID
 		
 		# Set up dataframe for summary numbers #
 		data <- nuseds[nuseds$POP_ID %in% p,]
@@ -288,8 +285,16 @@ for (reg in unique(popdat$region)){
 			spp = cu.frame$species[k]
 			year = cu.frame$year[k]
 			
-			if (spp=="all"){ CUs = unique(data$CU_NAME) } else { CUs = unique(data[data$SPECIES==spp,]$CU_NAME) }
-				
+			if (spp=="all"){ 
+				CUs = unique(data$CU_NAME) 
+			} else if (spp != "Pink") { 
+				CUs = unique(data[data$SPECIES==spp,]$CU_NAME) 
+			} else if (spp == "Pink" & cu.frame$odd_even[k] == "E") {
+				CUs = unique(data[data$SPECIES=="Pink" & data$ANALYSIS_YR%%2==0,]$CU_NAME) 
+			} else if (spp == "Pink" & cu.frame$odd_even[k] == "O") {
+				CUs = unique(data[data$SPECIES=="Pink" & data$ANALYSIS_YR%%2==1,]$CU_NAME) 
+			}
+			
 				temp = data[data$CU_NAME %in% CUs & data$ANALYSIS_YR==year,]
 				monitored = c(rep(NA, length(CUs)))
 			
@@ -304,25 +309,25 @@ for (reg in unique(popdat$region)){
 		}
 		
 		# PLOTTING #
-		pdf(paste("figures/CU-level_monitoring_coverage_Jun-2023_",reg,".pdf",sep=""), 6,6)
+		pdf(paste("figures/CU-level_monitoring_coverage_Aug-2023_",reg,".pdf",sep=""), 6,6)
 		par(mfrow=c(1,1))#, family="Avenir")#, mgp=c(2.5, 0.8, 0), mar=c(3.5, 3.5, 1, 2))
 		
-		plot(unique(cu.frame$year), cu.frame[cu.frame$species=="all",]$no.counted, "l", las =1, bty="l", xlab = "Year", ylab="Number of CUs with at least one pop'n counted", lwd=1, ylim=c(0, 1.1*max(cu.frame$total.cus)), col=grey(0.8), main=paste(reg))
+		plot(unique(cu.frame$year), cu.frame[cu.frame$species=="all",]$prop.counted, "l", las =1, bty="l", xlab = "Year", ylab="Proportion of CUs with at least one pop'n counted", lwd=1, ylim=c(0, 1.5), col=grey(0.8), main=paste(reg))
 		# axis(1, at=seq(1950,2020,5), lab=seq(1950,2020,5))
 		# axis(2, at=seq(0,70,10), lab=seq(0,1,.1), las=2)
 		
-		points(2021, tail(cu.frame$no.counted, 1), pch = 19, col="#2E8B57")
-		text(2021, tail(cu.frame$no.counted, 1), paste("n=",tail(cu.frame$no.counted, 1),sep=""), font = 2, cex=0.8, xpd=NA, pos=4, col="#2E8B57")
+		points(2021, tail(cu.frame$prop.counted, 1), pch = 19, col="#2E8B57")
+		text(2021, tail(cu.frame$prop.counted, 1), paste(100*round(tail(cu.frame$prop.counted, 1),2),"%",sep=""), font = 2, cex=0.8, xpd=NA, pos=4, col="#2E8B57")
 		
-		lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Chum",]$no.counted, col="grey20", lty=2, lwd=2)
-		lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Coho",]$no.counted, col="black", lty=3, lwd=1)
-		lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Chinook",]$no.counted, col="grey40", lty=4, lwd=1)
-		lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Sockeye",]$no.counted, col="grey50", lty=5, lwd=1)
-		lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Pink",]$no.counted, col="black", lwd=2)
-		lines(unique(cu.frame$year), cu.frame[cu.frame$species=="all",]$no.counted, lwd=4, col="#2E8B57")
+		lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Chum",]$prop.counted, col="grey20", lty=2, lwd=2)
+		lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Coho",]$prop.counted, col="black", lty=3, lwd=1)
+		lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Chinook",]$prop.counted, col="grey40", lty=4, lwd=1)
+		lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Sockeye",]$prop.counted, col="grey50", lty=5, lwd=1)
+		lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Pink",]$prop.counted, col=alpha("black",0.75), lwd=2)
+		lines(unique(cu.frame$year), cu.frame[cu.frame$species=="all",]$prop.counted, lwd=4, col="#2E8B57")
 		
-		legend("topright", lty= c(1,1,2,3,4,5), lwd=c(4,2,1,1,1,1), col=c("#2E8B57", "black","grey20","black","grey40","grey50"), 
-					 c("All systems (n=80)", "Pink", "Chum","Coho","Chinook","Sockeye"), bty="n", cex=.7)
+		legend("topright", lty= c(1,1,2,3,4,5), lwd=c(4,2,1,1,1,1), col=c("#2E8B57", alpha("black",0.75),"grey20","black","grey40","grey50"), 
+					 c("All systems", "Pink", "Chum","Coho","Chinook","Sockeye"), bty="n", cex=.7)
 		
 		dev.off()
 }
@@ -368,7 +373,15 @@ for (k in 1:nrow(cu.frame)){
 	spp = cu.frame$species[k]
 	year = cu.frame$year[k]
 	
-	if (spp=="all"){ CUs = unique(data$CU_NAME) } else { CUs = unique(data[data$SPECIES==spp,]$CU_NAME) }
+	if (spp=="all"){ 
+		CUs = unique(data$CU_NAME) 
+	} else if (spp != "Pink") { 
+	  CUs = unique(data[data$SPECIES==spp,]$CU_NAME) 
+	} else if (spp == "Pink" & cu.frame$odd_even[k] == "E") {
+		CUs = unique(data[data$SPECIES=="Pink" & data$ANALYSIS_YR%%2==0,]$CU_NAME) 
+	} else if (spp == "Pink" & cu.frame$odd_even[k] == "O") {
+		CUs = unique(data[data$SPECIES=="Pink" & data$ANALYSIS_YR%%2==1,]$CU_NAME) 
+	}
 	
 	temp = data[data$CU_NAME %in% CUs & data$ANALYSIS_YR==year,]
 	monitored = c(rep(NA, length(CUs)))
@@ -384,25 +397,25 @@ for (k in 1:nrow(cu.frame)){
 }
 
 # PLOTTING #
-pdf(paste("figures/CU-level_monitoring_coverage_Jun-2023_whole_coast.pdf",sep=""), 6,6)
+pdf(paste("figures/CU-level_monitoring_coverage_Aug-2023_whole_coast.pdf",sep=""), 6,6)
 par(mfrow=c(1,1))#, family="Avenir")#, mgp=c(2.5, 0.8, 0), mar=c(3.5, 3.5, 1, 2))
 
-plot(unique(cu.frame$year), cu.frame[cu.frame$species=="all",]$no.counted, "l", las =1, bty="l", xlab = "Year", ylab="Number of CUs with at least one pop'n counted", lwd=1, ylim=c(0, 1.1*max(cu.frame$total.cus)), col=grey(0.8), main="Coastwide")
+plot(unique(cu.frame$year), cu.frame[cu.frame$species=="all",]$prop.counted, "l", las =1, bty="l", xlab = "Year", ylab="Proportion of CUs with at least one pop'n counted", lwd=1, ylim=c(0, 1.5), col=grey(0.8), main="Coastwide")
 # axis(1, at=seq(1950,2020,5), lab=seq(1950,2020,5))
 # axis(2, at=seq(0,70,10), lab=seq(0,1,.1), las=2)
 
-points(2021, tail(cu.frame$no.counted, 1), pch = 19, col="#2E8B57")
-text(2021, tail(cu.frame$no.counted, 1), paste("n=",tail(cu.frame$no.counted, 1),sep=""), font = 2, cex=0.8, xpd=NA, pos=4, col="#2E8B57")
+points(2021, tail(cu.frame$prop.counted, 1), pch = 19, col="#2E8B57")
+text(2021, tail(cu.frame$prop.counted, 1), paste(100*round(tail(cu.frame$prop.counted, 1),2),"%", sep=""), font = 2, cex=0.8, xpd=NA, pos=4, col="#2E8B57")
 
-lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Chum",]$no.counted, col="grey20", lty=2, lwd=2)
-lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Coho",]$no.counted, col="black", lty=3, lwd=1)
-lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Chinook",]$no.counted, col="grey40", lty=4, lwd=1)
-lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Sockeye",]$no.counted, col="grey50", lty=5, lwd=1)
-lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Pink",]$no.counted, col="black", lwd=2)
-lines(unique(cu.frame$year), cu.frame[cu.frame$species=="all",]$no.counted, lwd=4, col="#2E8B57")
+lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Chum",]$prop.counted, col="grey20", lty=2, lwd=2)
+lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Coho",]$prop.counted, col="black", lty=3, lwd=1)
+lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Chinook",]$prop.counted, col="grey40", lty=4, lwd=1)
+lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Sockeye",]$prop.counted, col="grey50", lty=5, lwd=1)
+lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Pink",]$prop.counted, col=alpha("black",0.75), lwd=2)
+lines(unique(cu.frame$year), cu.frame[cu.frame$species=="all",]$prop.counted, lwd=4, col="#2E8B57")
 
-legend("topright", lty= c(1,1,2,3,4,5), lwd=c(4,2,1,1,1,1), col=c("#2E8B57", "black","grey20","black","grey40","grey50"), 
-			 c("All systems (n=80)", "Pink", "Chum","Coho","Chinook","Sockeye"), bty="n", cex=.7)
+legend("topright", lty= c(1,1,2,3,4,5), lwd=c(4,2,1,1,1,1), col=c("#2E8B57", alpha("black",0.75),"grey20","black","grey40","grey50"), 
+			 c("All systems", "Pink", "Chum","Coho","Chinook","Sockeye"), bty="n", cex=.7)
 
 dev.off()
 										 
