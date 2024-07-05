@@ -65,9 +65,9 @@ sock.rivers <- unique(data[data$SPECIES=="Sockeye",]$GEOGRAPHICAL_EXTNT_OF_ESTIM
 n.sock <- length(sock.rivers)
 
 # Calculating annual monitoring coverage #
-ny <- length(1950:2021)
+ny <- length(1955:2019)
 
-m <- data.frame(year = rep(c(1950:2021), 6),
+m <- data.frame(year = rep(c(1955:2019), 6),
 								species = rep(c("Pink","Chum", "Coho", "Chinook", "Sockeye","all"),each=ny),
 								odd_even = c(rep(c("O","E"), length.out=ny), rep(NA, 5*ny)),
 								total.systems = c(rep(n.podd, ny), rep(c(n.chum, n.coho, n.chinook, n.sock, n.rivers), each=ny)),
@@ -77,12 +77,12 @@ m <- data.frame(year = rep(c(1950:2021), 6),
 # Population data frame with monitoring coverage (number of systems/proportion of systems counted) #
 for (species in unique(m$species)) {
 	if(species=="all") {
-		for (i in 1950:2021){
+		for (i in 1955:2019){
 			m[m$species==species & m$year==i,]$no.counted = length(unique(data[data$ANALYSIS_YR==i,]$GEOGRAPHICAL_EXTNT_OF_ESTIMATE))
 		}
 	}
 	else { 
-		for (i in 1950:2021){
+		for (i in 1955:2019){
 			m[m$species==species & m$year==i,]$no.counted = length(unique(data[data$SPECIES==species & data$ANALYSIS_YR==i,]$GEOGRAPHICAL_EXTNT_OF_ESTIMATE)) }
 	}
 }
@@ -91,10 +91,10 @@ for (species in unique(m$species)) {
 m$prop.counted = m$no.counted/m$total.systems
 
 # Write to file #
-write.csv(m, "data_EA/monitoring_coverage_table_Aug-2023.csv")
+write.csv(m, "data_EA/monitoring_coverage_table_Mar-2024.csv")
 
 # Plotting #
-pdf("figures/River-level_monitoring_coverage_coastwide_Aug-2023.pdf", 6,6)
+pdf("figures/River-level_monitoring_coverage_coastwide_Mar-2024.pdf", 6,6)
 #tiff("monitoring_coverage_Sept-2019.tiff", width=4, height=4, units="in", pointsize=9, res=600)
 #windows(9,9)
 
@@ -106,8 +106,8 @@ plot(unique(m$year), m[m$species=="all",]$no.counted, "l", las =1, bty="l", xlab
 # axis(1, at=seq(1950,2020,5), lab=seq(1950,2020,5))
 # axis(2, at=seq(0,70,10), lab=seq(0,1,.1), las=2)
 
-points(2021, 530, pch = 19, col="#2E8B57")
-text(2021, 530, "n=530", font = 2, cex=0.8, xpd=NA, pos=4, col="#2E8B57")
+points(2019, m[m$year==2019 & m$species=="all",]$no.counted, pch = 19, col="#2E8B57")
+text(2019, m[m$year==2019 & m$species=="all",]$no.counted, "n=716", font = 2, cex=0.8, xpd=NA, pos=4, col="#2E8B57")
 
 lines(unique(m$year), m[m$species=="Chum",]$no.counted, col="grey20", lty=2, lwd=2)
 lines(unique(m$year), m[m$species=="Coho",]$no.counted, col="black", lty=3, lwd=1)
@@ -169,9 +169,9 @@ for (reg in unique(popdat$PSE_region)){
 		n.sock <- length(sock.rivers)
 		
 		# Calculating annual monitoring coverage #
-		ny <- length(1950:2021)
+		ny <- length(1955:2019)
 		
-		m <- data.frame(year = rep(c(1950:2021), 6),
+		m <- data.frame(year = rep(c(1955:2019), 6),
 										species = rep(c("Pink","Chum", "Coho", "Chinook", "Sockeye","all"),each=ny),
 										odd_even = c(rep(c("O","E"), length.out=ny), rep(NA, 5*ny)),
 										total.systems = c(rep(n.podd, ny), rep(c(n.chum, n.coho, n.chinook, n.sock, n.rivers), each=ny)),
@@ -181,12 +181,12 @@ for (reg in unique(popdat$PSE_region)){
 		# Population data frame with monitoring coverage (number of systems/proportion of systems counted) #
 		for (species in unique(m$species)) {
 			if(species=="all") {
-				for (i in 1950:2021){
+				for (i in 1955:2019){
 					m[m$species==species & m$year==i,]$no.counted = length(unique(data[data$ANALYSIS_YR==i,]$GEOGRAPHICAL_EXTNT_OF_ESTIMATE))
 				}
 			}
 			else { 
-				for (i in 1950:2021){
+				for (i in 1955:2019){
 					m[m$species==species & m$year==i,]$no.counted = length(unique(data[data$SPECIES==species & data$ANALYSIS_YR==i,]$GEOGRAPHICAL_EXTNT_OF_ESTIMATE)) }
 			}
 		}
@@ -195,10 +195,10 @@ for (reg in unique(popdat$PSE_region)){
 		m$prop.counted = m$no.counted/m$total.systems
 		
 		# Write to file #
-		write.csv(m, "data_EA/regional_monitoring_coverage_table_Aug_2023.csv")
+		write.csv(m, "data_EA/regional_monitoring_coverage_table_Mar-2024.csv")
 		
 		# Plotting #
-		pdf(paste("figures/River-level_monitoring_coverage_Aug-2023_",reg,".pdf",sep=""), 6,6)
+		pdf(paste("figures/River-level_monitoring_coverage_Mar-2024_",reg,".pdf",sep=""), 6,6)
 		#tiff("monitoring_coverage_Sept-2019.tiff", width=4, height=4, units="in", pointsize=9, res=600)
 		#windows(9,9)
 		
@@ -210,8 +210,8 @@ for (reg in unique(popdat$PSE_region)){
 		# axis(1, at=seq(1950,2020,5), lab=seq(1950,2020,5))
 		# axis(2, at=seq(0,70,10), lab=seq(0,1,.1), las=2)
 		
-		points(2021, tail(m$no.counted, 1), pch = 19, col="#2E8B57")
-		text(2021, tail(m$no.counted, 1), paste("n=",tail(m$no.counted, 1),sep=""), font = 2, cex=0.8, xpd=NA, pos=4, col="#2E8B57")
+		points(2019, tail(m$no.counted, 1), pch = 19, col="#2E8B57")
+		text(2019, tail(m$no.counted, 1), paste("n=",tail(m$no.counted, 1),sep=""), font = 2, cex=0.8, xpd=NA, pos=4, col="#2E8B57")
 		
 		lines(unique(m$year), m[m$species=="Chum",]$no.counted, col="grey20", lty=2, lwd=2)
 		lines(unique(m$year), m[m$species=="Coho",]$no.counted, col="black", lty=3, lwd=1)
@@ -249,8 +249,8 @@ for (reg in unique(popdat$PSE_region)){
 		# Set up dataframe for summary numbers #
 		data <- nuseds[nuseds$POP_ID %in% p,]
 		
-		ymax=2021
-		ny=length(1950:2021)
+		ymax=2019
+		ny=length(1955:2019)
 		
 		all.rivers <- unique(data$CU_NAME)
 		n.rivers <- length(all.rivers)
@@ -273,7 +273,7 @@ for (reg in unique(popdat$PSE_region)){
 		sock.cus <- unique(data[data$SPECIES=="Sockeye",]$CU_NAME)
 		n.sock <- length(chum.cus)
 		
-		cu.frame = data.frame(year=c(1950:ymax),
+		cu.frame = data.frame(year=c(1955:ymax),
 													species = rep(c("Pink","Chum", "Coho", "Chinook", "Sockeye","all"),each=ny),
 													odd_even = c(rep(c("E","O"), length.out=ny), rep(NA, 5*ny)),
 													total.cus = c(rep(n.podd, ny), rep(c(n.chum, n.coho, n.chinook, n.sock, n.rivers), each=ny)),
@@ -309,15 +309,15 @@ for (reg in unique(popdat$PSE_region)){
 		}
 		
 		# PLOTTING #
-		pdf(paste("figures/CU-level_monitoring_coverage_Aug-2023_",reg,".pdf",sep=""), 6,6)
+		pdf(paste("figures/CU-level_monitoring_coverage_Mar-2024_",reg,".pdf",sep=""), 6,6)
 		par(mfrow=c(1,1))#, family="Avenir")#, mgp=c(2.5, 0.8, 0), mar=c(3.5, 3.5, 1, 2))
 		
 		plot(unique(cu.frame$year), cu.frame[cu.frame$species=="all",]$prop.counted, "l", las =1, bty="l", xlab = "Year", ylab="Proportion of CUs with at least one pop'n counted", lwd=1, ylim=c(0, 1.5), col=grey(0.8), main=paste(reg))
 		# axis(1, at=seq(1950,2020,5), lab=seq(1950,2020,5))
 		# axis(2, at=seq(0,70,10), lab=seq(0,1,.1), las=2)
 		
-		points(2021, tail(cu.frame$prop.counted, 1), pch = 19, col="#2E8B57")
-		text(2021, tail(cu.frame$prop.counted, 1), paste(100*round(tail(cu.frame$prop.counted, 1),2),"%",sep=""), font = 2, cex=0.8, xpd=NA, pos=4, col="#2E8B57")
+		points(2019, tail(cu.frame$prop.counted, 1), pch = 19, col="#2E8B57")
+		text(2019, tail(cu.frame$prop.counted, 1), paste(100*round(tail(cu.frame$prop.counted, 1),2),"%",sep=""), font = 2, cex=0.8, xpd=NA, pos=4, col="#2E8B57")
 		
 		lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Chum",]$prop.counted, col="grey20", lty=2, lwd=2)
 		lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Coho",]$prop.counted, col="black", lty=3, lwd=1)
@@ -337,8 +337,8 @@ for (reg in unique(popdat$PSE_region)){
 ################################################################################
 data = nuseds
 
-ymax=2021
-ny=length(1950:2021)
+ymax=2019
+ny=length(1955:2019)
 
 all.rivers <- unique(data$CU_NAME)
 n.rivers <- length(all.rivers)
@@ -361,7 +361,7 @@ n.chinook <- length(chinook.cus)
 sock.cus <- unique(data[data$SPECIES=="Sockeye",]$CU_NAME)
 n.sock <- length(chum.cus)
 
-cu.frame = data.frame(year=c(1950:ymax),
+cu.frame = data.frame(year=c(1955:ymax),
 											species = rep(c("Pink","Chum", "Coho", "Chinook", "Sockeye","all"),each=ny),
 											odd_even = c(rep(c("E","O"), length.out=ny), rep(NA, 5*ny)),
 											total.cus = c(rep(n.podd, ny), rep(c(n.chum, n.coho, n.chinook, n.sock, n.rivers), each=ny)),
@@ -397,15 +397,15 @@ for (k in 1:nrow(cu.frame)){
 }
 
 # PLOTTING #
-pdf(paste("figures/CU-level_monitoring_coverage_Aug-2023_whole_coast.pdf",sep=""), 6,6)
+pdf(paste("figures/CU-level_monitoring_coverage_Mar-2024_whole_coast.pdf",sep=""), 6,6)
 par(mfrow=c(1,1))#, family="Avenir")#, mgp=c(2.5, 0.8, 0), mar=c(3.5, 3.5, 1, 2))
 
 plot(unique(cu.frame$year), cu.frame[cu.frame$species=="all",]$prop.counted, "l", las =1, bty="l", xlab = "Year", ylab="Proportion of CUs with at least one pop'n counted", lwd=1, ylim=c(0, 1.5), col=grey(0.8), main="Coastwide")
 # axis(1, at=seq(1950,2020,5), lab=seq(1950,2020,5))
 # axis(2, at=seq(0,70,10), lab=seq(0,1,.1), las=2)
 
-points(2021, tail(cu.frame$prop.counted, 1), pch = 19, col="#2E8B57")
-text(2021, tail(cu.frame$prop.counted, 1), paste(100*round(tail(cu.frame$prop.counted, 1),2),"%", sep=""), font = 2, cex=0.8, xpd=NA, pos=4, col="#2E8B57")
+points(2019, tail(cu.frame$prop.counted, 1), pch = 19, col="#2E8B57")
+text(2019, tail(cu.frame$prop.counted, 1), paste(100*round(tail(cu.frame$prop.counted, 1),2),"%", sep=""), font = 2, cex=0.8, xpd=NA, pos=4, col="#2E8B57")
 
 lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Chum",]$prop.counted, col="grey20", lty=2, lwd=2)
 lines(unique(cu.frame$year), cu.frame[cu.frame$species=="Coho",]$prop.counted, col="black", lty=3, lwd=1)
